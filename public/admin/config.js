@@ -25,9 +25,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     );
                     // Reload to apply the token
                     console.log(
-                        'Token stored in localStorage, reloading /admin'
+                        'Token stored in localStorage'
                     );
-                    window.location.href = '/admin';
+                    // window.location.href = '/admin';
                 }
             } else {
                 console.log(
