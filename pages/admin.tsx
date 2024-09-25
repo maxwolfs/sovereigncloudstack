@@ -4,22 +4,6 @@ import Head from 'next/head';
 import Script from 'next/script';
 
 const AdminPage = () => {
-    useEffect(() => {
-        console.log('Checking authentication status');
-        const tokenInStorage = localStorage.getItem('netlify-cms-user');
-        console.log('Token in localStorage:', tokenInStorage);
-        if (!tokenInStorage) {
-            const tokenCookie = document.cookie
-                .split('; ')
-                .find((row) => row.startsWith('access_token='));
-            console.log('Token in cookie:', tokenCookie);
-            if (!tokenCookie) {
-                console.log('No token found, redirecting to /api/auth');
-                // Redirect to /api/auth if no token is found
-                window.location.href = '/api/auth';
-            }
-        }
-    }, []);
 
     return (
         <div>
