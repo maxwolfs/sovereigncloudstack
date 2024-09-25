@@ -4,6 +4,18 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 First, run the development server:
 
+
+* Create `.env.local` in the toplevel directory
+  (add the right GITHUB_CLIENT_SECRET)
+  ```
+  git clone git@github.com:SovereignCloudStack/sovereigncloudstack.org.git
+  cd sovereigncloudstack.org
+  cat <<'EOF'
+  GITHUB_CLIENT_ID=Ov23liC9T086hdQd07Sl
+  GITHUB_CLIENT_SECRET=REDACTED
+  REDIRECT_URL=http://localhost:3000/admin
+  EOF
+  ```
 * Install NodeJS
   ```bash
   apt-get install nodejs -y
