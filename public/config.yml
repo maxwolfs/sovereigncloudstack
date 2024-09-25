@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: maxwolfs/sovereigncloudstack.org
+  repo: SovereignCloudStack/sovereigncloudstack.org
   branch: main
   auth_scope: repo
   base_url: https://www.sovereigncloudstack.org
