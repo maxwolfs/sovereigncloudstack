@@ -96,16 +96,6 @@ const Footer: React.FC<FooterProps> = (props: FooterProps) => {
                         >
                             Open Positions
                         </Link>
-                        <Link
-                            sx={{
-                                color: '#fff',
-                                textDecoration: 'none',
-                                fontSize: [1, 2, 2, 2],
-                            }}
-                            href='https://scs.community/de/tenders/'
-                        >
-                            Ausschreibungen
-                        </Link>
                     </Box>
                 </Box>
                 <Box
