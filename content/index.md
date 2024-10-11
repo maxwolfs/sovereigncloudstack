@@ -16,12 +16,6 @@ en:
       headline2: 'Cloud Platform...'
       text1:
         title: '... where users can easily switch between different cloud service providers without being locked in.'
-      news:
-        title: 'SCS Summit #3'
-        date: 'May 8, 2025'
-        body: 'The SCS Summit 2025 will once again bring together decision-makers from politics and business. Stay tuned for further announcements!'
-        linkUrl: ''
-        linkText: ''
     - type: 'second'
       headline1: 'a platform...'
       boxes:
@@ -65,12 +59,6 @@ de:
       headline2: 'die Cloud …'
       text1:
         title: '… auf der Nutzer mühelos zwischen verschiedenen Anbietern wechseln können.'
-      news:
-        title: 'SCS Summit #3'
-        date: '8. Mai 2025'
-        body: 'Der SCS Summit 2025 bringt erneut Entscheidungsträger aus Politik und Wirtschaft zusammen. Bleiben Sie gespannt auf weitere Ankündigungen!'
-        linkUrl: ''
-        linkText: ''
     - type: 'second'
       headline1: 'eine Plattform…'
       boxes:
