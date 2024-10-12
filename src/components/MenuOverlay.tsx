@@ -1,7 +1,8 @@
 import React from 'react';
-import { Box, Grid, Text, useThemeUI } from 'theme-ui';
+import { Box, Grid, NavLink, Text, useThemeUI } from 'theme-ui';
 import TopNavigation from './TopNavigation';
-import { Link } from 'gatsby-link';
+import { useStaticQuery, graphql } from 'gatsby';
+import { useI18next } from 'gatsby-plugin-react-i18next';
 
 interface MenuOverlayProps {
     showOverlay: boolean;
@@ -9,31 +10,45 @@ interface MenuOverlayProps {
     logoSrc: string;
 }
 
-const links = {
-    discover: [
-        { title: 'Über SCS', href: '/' },
-        { title: 'SCS nutzen', href: '/' },
-        { title: 'Team', href: '/' },
-        { title: 'Referenzen', href: '/' },
-        { title: 'Community', href: '/' },
-    ],
-    news: [
-        { title: 'Neuigkeiten', href: '/' },
-        { title: 'Veranstaltungen', href: '/' },
-    ],
-    service: [
-        { title: 'Kontakt', href: '/' },
-        { title: 'Presse', href: '/' },
-        { title: 'Konferenzbeiträge', href: '/' },
-    ],
-};
-
 const MenuOverlay: React.FC<MenuOverlayProps> = ({
     showOverlay,
     setShowOverlay,
     logoSrc,
 }) => {
     const { theme } = useThemeUI();
+    const { language } = useI18next();
+
+    const data = useStaticQuery(graphql`
+        query MenuOverlayQuery {
+            allMarkdownRemark(
+                filter: { frontmatter: { component: { eq: "menuOverlay" } } }
+            ) {
+                nodes {
+                    frontmatter {
+                        locale
+                        columns {
+                            title
+                            links {
+                                label
+                                url
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    `);
+
+    const menuContent = data.allMarkdownRemark.nodes.find(
+        (node: { frontmatter: { locale: string } }) =>
+            node.frontmatter.locale === language
+    );
+
+    if (!menuContent) {
+        return <div>Error: Menu content is missing!</div>;
+    }
+
+    const columns = menuContent.frontmatter.columns;
 
     if (!showOverlay) {
         return null;
@@ -83,88 +98,41 @@ const MenuOverlay: React.FC<MenuOverlayProps> = ({
                         mx: 'auto',
                     }}
                 >
-                    <Box>
-                        <Text
-                            variant='bold'
-                            sx={{ mb: 3, fontSize: [1, 2, 3, 3] }}
-                        >
-                            SCS entdecken
-                        </Text>
-                        {links.discover.map((link) => (
-                            <Box key={link.title} my={[2, 2, 4, 4]}>
-                                <Link
-                                    to={link.href}
-                                    sx={{ textDecoration: 'none' }}
-                                >
-                                    <Text
-                                        sx={{
-                                            cursor: 'pointer',
-                                            color: 'text',
-                                            fontSize: [1, 2, 3, 3],
-                                        }}
+                    {columns.map((column: any, colIndex: number) => (
+                        <Box key={colIndex}>
+                            <Text
+                                variant='bold'
+                                sx={{ mb: 3, fontSize: [1, 2, 3, 3] }}
+                            >
+                                {column.title}
+                            </Text>
+                            {column.links.map((link: any, linkIndex: number) => (
+                                <Box key={linkIndex} my={[2, 2, 4, 4]}>
+                                    <NavLink
+                                        href={link.url}
+                                        sx={{ textDecoration: 'none' }}
                                     >
-                                        {link.title}
-                                    </Text>
-                                </Link>
-                            </Box>
-                        ))}
-                    </Box>
-                    <Box>
-                        <Text
-                            variant='bold'
-                            sx={{ mb: 3, fontSize: [1, 2, 3, 3] }}
-                        >
-                            Aktuelles
-                        </Text>
-                        {links.news.map((link) => (
-                            <Box key={link.title} my={[2, 2, 4, 4]}>
-                                <Link
-                                    to={link.href}
-                                    sx={{ textDecoration: 'none' }}
-                                >
-                                    <Text
-                                        sx={{
-                                            cursor: 'pointer',
-                                            color: 'text',
-                                            fontSize: [1, 2, 3, 3],
-                                        }}
-                                    >
-                                        {link.title}
-                                    </Text>
-                                </Link>
-                            </Box>
-                        ))}
-                    </Box>
-                    <Box>
-                        <Text
-                            variant='bold'
-                            sx={{ mb: 3, fontSize: [1, 2, 3, 3] }}
-                        >
-                            Service
-                        </Text>
-                        {links.service.map((link) => (
-                            <Box key={link.title} my={[2, 2, 4, 4]}>
-                                <Link
-                                    to={link.href}
-                                    sx={{ textDecoration: 'none' }}
-                                >
-                                    <Text
-                                        sx={{
-                                            cursor: 'pointer',
-                                            color: 'text',
-                                            fontSize: [1, 2, 3, 3],
-                                        }}
-                                    >
-                                        {link.title}
-                                    </Text>
-                                </Link>
-                            </Box>
-                        ))}
-                    </Box>
+                                        <Text
+                                            variant='body'
+                                            sx={{
+                                                cursor: 'pointer',
+                                                color: 'text',
+                                                fontSize: [1, 2, 3, 3],
+                                            }}
+                                        >
+                                            {link.label}
+                                        </Text>
+                                    </NavLink>
+                                </Box>
+                            ))}
+                        </Box>
+                    ))}
                 </Grid>
             </Box>
 
-            <Box sx={{ textAlign: 'center', mt: 4 }}>Open Source Business Alliance</Box>
+            <Box sx={{ textAlign: 'center', mt: 4 }}>
+                Open Source Business Alliance
+            </Box>
         </Box>
     );
 };
