@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'Dazzed';
+    src: url('../fonts/Dazzed-Bold.woff2') format('woff2');
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Dazzed';
+    src: url('../fonts/Dazzed-SemiBold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+}
