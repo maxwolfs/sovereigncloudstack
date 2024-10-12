@@ -1,7 +1,7 @@
 ---
 title: 'Sovereign Cloud Stack'
 
-language: "de"
+language: 'de'
 
 meta:
     viewport: 'width=device-width, initial-scale=1'
@@ -14,7 +14,6 @@ meta:
     og_image: '/images/share.webp'
 
 sections:
-
     - type: 'hero'
       headline1: 'Entdecken Sie'
       headline2: 'die Cloud...'
@@ -32,12 +31,15 @@ sections:
 
     - type: 'third'
       headline1: '... entwickelt von Vielen.'
-      text: 'Collectively created by a global developer community, ensuring a diverse and innovative approach to solving complex cloud challenges without vendor lock-in.'
+      text: 'Gemeinschaftlich von einer weltweiten Entwicklergemeinschaft erstellt, die einen vielfältigen und innovativen Ansatz zur Lösung komplexer Cloud-Herausforderungen bietet, ohne an einen Anbieter gebunden zu sein.'
 
     - type: 'fourth'
       headline1: 'Digitale Souveränität'
       headline2: 'in der Cloud'
       text: 'ermöglicht Organisationen, Kontrolle über ihre Daten zu behalten und ihre Unabhängigkeit von proprietärer Software zu sichern.'
+      button:
+          label: 'Mehr erfahren →'
+          href: '/digitale-souveränität'
       personas:
           - title: '... öffentlicher Sektor'
             text: 'Maßgeschneiderte Lösungen, die speziell auf die Anforderungen von Behörden abgestimmt sind, um Compliance und Sicherheit langfristig zu gewährleisten.'

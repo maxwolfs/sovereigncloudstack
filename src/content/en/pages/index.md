@@ -1,7 +1,7 @@
 ---
 title: 'Sovereign Cloud Stack'
 
-language: "en"
+language: 'en'
 
 meta:
     viewport: 'width=device-width, initial-scale=1'
@@ -14,7 +14,6 @@ meta:
     og_image: '/images/share.webp'
 
 sections:
-
     - type: 'hero'
       headline1: 'imagine a'
       headline2: 'cloud platform...'
@@ -38,6 +37,9 @@ sections:
       headline1: 'Digital sovereignty'
       headline2: 'in the cloud'
       text: 'enables organizations to control their data and maintain their independence from proprietary software.'
+      button:
+          label: 'Discover more →'
+          href: '/digital-sovereignity'
       personas:
           - title: '... public sector'
             text: 'tailored solutions designed to meet the specific requirements of government agencies to ensure compliance and security sustainably.'

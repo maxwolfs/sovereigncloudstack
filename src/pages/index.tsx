@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Grid, NavLink, Text, useColorMode, useThemeUI } from 'theme-ui';
-import { graphql } from 'gatsby';
+import { graphql, navigate } from 'gatsby';
 import MenuOverlay from '../components/MenuOverlay';
 import TopNavigation from '../components/TopNavigation';
 import CustomButton from '../components/CustomButton';
 import Footer from '../components/Footer';
 import { StaticImage } from 'gatsby-plugin-image';
-import { useI18next } from 'gatsby-plugin-react-i18next';
-import LanguageSwitcher from '../components/LanguageSwitcher';
+import { Link, useI18next } from 'gatsby-plugin-react-i18next';
 
 export default function Home({ data }: any) {
     const { theme } = useThemeUI();
@@ -15,7 +14,6 @@ export default function Home({ data }: any) {
     const [colorMode, setColorMode] = useColorMode();
     const [logoSrc, setLogoSrc] = useState('/logo/scs-horizontal-black.svg'); // Default image
     const { language } = useI18next();
-
 
     const content = data.markdownRemark.frontmatter;
 
@@ -84,6 +82,7 @@ export default function Home({ data }: any) {
                 logoSrc={logoSrc}
                 showOverlay={showOverlay}
             />
+
             {/* Hero Section */}
             <Box
                 sx={{
@@ -198,38 +197,99 @@ export default function Home({ data }: any) {
                 sx={{
                     maxWidth: '1920px',
                     m: 'auto',
-                    mt: 6,
-                    px: ['20px', '40px'],
+                    pt: [7],
+                    px: ['20px', '20px', '20px', '40px'],
                 }}
             >
-                <StaticImage
-                    src='../images/bg1.webp' // Adjust to your actual image path in src
-                    alt='Background'
-                    layout='fullWidth'
-                    placeholder='blurred'
-                    style={{
-                        position: 'absolute',
-                        left: 0,
+                <Grid
+                    columns={[1, null, 3]}
+                    gap={[4, 20, 20, 40]}
+                    sx={{
+                        gridColumn: '1 / -1',
+                        gridTemplateRows: [null, null, null, '100px'],
                         width: '100%',
-                        height: '100%',
-                        zIndex: -1, // Send to background
+                        maxWidth: '1920px',
+                        m: 'auto',
                     }}
-                />
-                <Grid columns={[1, null, 3]} gap={4}>
-                    {content.sections[1].boxes.map((box: any, index: number) => (
-                        <Box
-                            key={index}
+                >
+                    <StaticImage
+                        src='../images/bg1.webp' // Adjust to your actual image path in src
+                        alt='Background'
+                        layout='fullWidth'
+                        placeholder='blurred'
+                        style={{
+                            position: 'absolute',
+                            left: 0,
+                            width: '100%',
+                            height: '100%',
+                            zIndex: -1, // Send to background
+                        }}
+                    />
+                    <Box
+                        sx={{
+                            gridColumn: ['1 / -1', null, '2 / 7'],
+                            zIndex: ['-1000', '-1000', '-1000', '-1000'],
+                            mb: [0, 4, 4, 7],
+                        }}
+                    >
+                        <Text
+                            variant='heading'
                             sx={{
-                                background: theme.colors?.boxBackground,
-                                boxShadow: theme.colors?.boxShadow,
-                                p: 4,
-                                mb: 4,
+                                fontSize: [6, 7, 7, 8],
                             }}
                         >
-                            <Text variant='bold'>{box.title}</Text> <br />
-                            <Text>{box.text}</Text>
-                        </Box>
-                    ))}
+                            {content.sections[1].headline1}
+                        </Text>
+                    </Box>
+                </Grid>
+                <Grid
+                    columns={[1, null, 3]}
+                    gap={[4, 4, 4, '40px']}
+                    sx={{
+                        gridColumn: '1 / -1', // Span across all columns
+                        gridTemplateRows: [null, null, null, '300px'],
+                        width: '100%', // Full width,
+                        maxWidth: '1920px',
+                        m: 'auto',
+                        pt: [7],
+                    }}
+                >
+                    {content.sections[1].boxes.map(
+                        (box: any, index: number) => (
+                            <Box
+                                key={index}
+                                sx={{
+                                    background: theme.colors?.boxBackground,
+                                    boxShadow: theme.colors?.boxShadow,
+                                    p: 4,
+                                    mb: 4,
+                                }}
+                            >
+                                <Text
+                                    variant='bold'
+                                    sx={{ fontSize: [1, 2, 2, 2] }}
+                                >
+                                    {box.title}
+                                    <br />
+                                </Text>
+                                <Text
+                                    variant='body'
+                                    sx={{ fontSize: [1, 2, 2, 2] }}
+                                >
+                                    {box.text}
+                                </Text>
+                                {box.button && (
+                                    <Box sx={{ my: [1, 2, 3, 4] }}>
+                                        <CustomButton
+                                            variant='primary'
+                                            label={box.button.label}
+                                            href={box.button.href}
+                                        />
+                                    </Box>
+                                )}
+                            </Box>
+                        )
+                    )}
                 </Grid>
             </Box>
 
@@ -238,8 +298,8 @@ export default function Home({ data }: any) {
                 sx={{
                     maxWidth: '1920px',
                     m: 'auto',
-                    mt: 6,
-                    px: ['20px', '40px'],
+                    pt: [7],
+                    px: ['20px', '20px', '20px', '40px'],
                 }}
             >
                 <StaticImage
@@ -255,29 +315,64 @@ export default function Home({ data }: any) {
                         zIndex: -1, // Send to background
                     }}
                 />
-                <Text
-                    variant='heading'
+                <Grid
+                    columns={[1, null, 6]}
+                    gap={[4, 20, 20, 40]}
                     sx={{
-                        fontSize: [6, 7, 8],
-                        textAlign: 'center',
-                        py: 6,
+                        gridColumn: '1 / -1',
+                        width: '100%',
+                        maxWidth: '1920px',
+                        m: 'auto',
+                        gridTemplateRows: '300px',
                     }}
                 >
-                    {content.sections[2].headline1}
-                </Text>
-                <br />
-                <Text variant='body' sx={{ textAlign: 'center' }}>
-                    {content.sections[2].text}
-                </Text>
+                    <Box
+                        sx={{
+                            gridColumn: ['1 / -1', null, '1 / 7'],
+                            zIndex: ['-1000', '-1000', '-1000', '-1000'],
+                            mt: [5, 4, 4, 7],
+                        }}
+                    >
+                        <Text
+                            variant='heading'
+                            sx={{
+                                fontSize: [6, 7, 7, 8],
+                            }}
+                        >
+                            {content.sections[2].headline1}
+                        </Text>
+                    </Box>
+                </Grid>
+
+                <Box
+                    sx={{
+                        gridColumn: ['1 / -1', null, '5 / 7'],
+                        mt: [0, 4, 4, 6],
+                        mb: [4, 4, 4, 6],
+                        width: '100%',
+                    }}
+                >
+                    <Box
+                        sx={{
+                            background: theme.colors?.boxBackground,
+                            boxShadow: theme.colors?.boxShadow,
+                        }}
+                    >
+                        <Text variant='body' sx={{ fontSize: [0, 1, 1, 2] }}>
+                            {content.sections[2].text}
+                        </Text>
+                    </Box>
+                </Box>
             </Box>
 
-            {/* Fourth Section with Personas */}
+            {/* Fourth Section */}
             <Box
                 sx={{
                     maxWidth: '1920px',
                     m: 'auto',
-                    mt: 6,
-                    px: ['20px', '40px'],
+                    pt: [5, 5, 5, 6],
+                    mb: [4, 4, 4, 6],
+                    px: ['20px', '20px', '20px', '40px'],
                 }}
             >
                 <StaticImage
@@ -293,26 +388,115 @@ export default function Home({ data }: any) {
                         zIndex: -1, // Send to background
                     }}
                 />
-                <Text variant='heading' sx={{ fontSize: [6, 7, 8] }}>
-                    {content.sections[3].headline1} <br />
-                    {content.sections[3].headline2}
-                </Text>
-                <Grid columns={[1, null, 3]} gap={4}>
-                    {content.sections[3].personas.map((persona: any, index: number) => (
+                <Grid
+                    columns={[2, 4, 4, 6]}
+                    gap={[4, 20, 20, 40]}
+                    sx={{
+                        gridTemplateRows: [null, null, null, '300px'],
+                    }}
+                >
+                    <Box
+                        sx={{
+                            gridColumn: ['1 / -1', null, '1 / 7'],
+                            zIndex: ['-1000', '-1000', '-1000', '-1000'],
+                        }}
+                    >
+                        <Text
+                            variant='heading'
+                            sx={{
+                                fontSize: [6, 7, 7, 8],
+                            }}
+                        >
+                            {content.sections[3].headline1} <br />
+                            {content.sections[3].headline2}
+                        </Text>
+                    </Box>
+                    <Box
+                        sx={{
+                            gridColumn: ['2 / 2', '4 / 4', '4 / 4', '6 / 6'],
+                        }}
+                    >
                         <Box
-                            key={index}
+                            mb={[3, 3, 3, 4]}
                             sx={{
                                 background: theme.colors?.boxBackground,
                                 boxShadow: theme.colors?.boxShadow,
-                                p: 4,
-                                mb: 4,
                             }}
                         >
-                            <Text variant='bold'>{persona.title}</Text>
-                            <br />
-                            <Text>{persona.text}</Text>
+                            <Text
+                                variant='body'
+                                sx={{ fontSize: [1, 1, 1, 1] }}
+                            >
+                                {content.sections[3].text}
+                            </Text>
+                            <Box
+                                sx={{
+                                    background: theme.colors?.boxBackground,
+                                    boxShadow: theme.colors?.boxShadow,
+                                }}
+                            >
+                                <Text
+                                    variant='body'
+                                    sx={{ fontSize: [1, 1, 1, 1] }}
+                                >
+                                    <NavLink
+                                        onClick={() => {
+                                            navigate(
+                                                content.sections[3].button.href
+                                            );
+                                        }}
+                                        sx={{
+                                            color: theme.colors?.primary,
+                                            textDecoration: 'none',
+                                            cursor: 'pointer',
+                                        }}
+                                    >
+                                        {content.sections[3].button.label}
+                                    </NavLink>
+                                </Text>
+                            </Box>
                         </Box>
-                    ))}
+                    </Box>
+                </Grid>
+
+                {/* Personas */}
+                <Grid
+                    columns={[1, 1, 3, 3]}
+                    gap={[4, 20, 20, 40]}
+                    sx={{
+                        gridColumn: '1 / -1',
+                        width: '100%',
+                        maxWidth: '1920px',
+                        m: 'auto',
+                        mb: 7,
+                        mt: 6,
+                    }}
+                >
+                    {content.sections[3].personas.map(
+                        (persona: any, index: number) => (
+                            <Box
+                                key={index}
+                                sx={{
+                                    background: theme.colors?.boxBackground,
+                                    boxShadow: theme.colors?.boxShadow,
+                                }}
+                            >
+                                <Text
+                                    variant='bold'
+                                    sx={{ fontSize: [1, 2, 2, 2] }}
+                                >
+                                    {persona.title}
+                                    <br />
+                                </Text>
+                                <Text
+                                    variant='body'
+                                    sx={{ fontSize: [1, 2, 2, 2] }}
+                                >
+                                    {persona.text}
+                                </Text>
+                            </Box>
+                        )
+                    )}
                 </Grid>
             </Box>
 
@@ -320,6 +504,7 @@ export default function Home({ data }: any) {
         </>
     );
 }
+
 export const query = graphql`
     query HomePageQuery($language: String!) {
         markdownRemark(frontmatter: { language: { eq: $language } }) {
@@ -339,6 +524,11 @@ export const query = graphql`
                     headline1
                     headline2
                     text1
+                    text
+                    button {
+                        href
+                        label
+                    }
                     boxes {
                         title
                         text
