@@ -11,31 +11,9 @@ export default function Home({ data, pageContext }: any) {
     const { language } = pageContext;
     const { theme } = useThemeUI();
     const [showOverlay, setShowOverlay] = useState<boolean>(false);
-    const [colorMode, setColorMode] = useColorMode();
     const [logoSrc, setLogoSrc] = useState('/logo/scs-horizontal-black.svg'); // Default image
 
     const content = data.markdownRemark.frontmatter;
-
-    useEffect(() => {
-        const updateColorMode = () => {
-            const prefersDark = window.matchMedia(
-                '(prefers-color-scheme: dark)'
-            ).matches;
-            const newMode = prefersDark ? 'dark' : 'default';
-            setColorMode(newMode);
-        };
-
-        // Initial check and setup
-        updateColorMode();
-        const mediaQueryList = window.matchMedia(
-            '(prefers-color-scheme: dark)'
-        );
-        mediaQueryList.addEventListener('change', updateColorMode);
-
-        // Cleanup
-        return () =>
-            mediaQueryList.removeEventListener('change', updateColorMode);
-    }, [setColorMode]);
 
     useEffect(() => {
         if (showOverlay) {

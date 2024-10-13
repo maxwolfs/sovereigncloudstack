@@ -26,11 +26,11 @@ const TopNavigation: React.FC<TopNavigationProps> = (
                 left: 0,
                 zIndex: 1000,
                 width: '100%',
-                bg: theme.colors?.background,
+                // bg: theme.colors?.background,
                 // pt: showOverlay ? 0 : 3
                 py: 3,
-                background: theme.colors?.boxBackground,
-                boxShadow: theme.colors?.boxShadow,
+                // background: theme.colors?.boxBackground,
+                // boxShadow: theme.colors?.boxShadow,
             }}
         >
             <Box
@@ -46,6 +46,7 @@ const TopNavigation: React.FC<TopNavigationProps> = (
                 <Box
                     sx={{
                         alignSelf: 'flex-start',
+                        background: theme.colors?.background,
                     }}
                 >
                     <LanguageSwitcher />
@@ -68,6 +69,7 @@ const TopNavigation: React.FC<TopNavigationProps> = (
                     sx={{
                         display: 'flex',
                         flexDirection: 'column',
+                        background: theme.colors?.background,
                     }}
                 >
                     <CustomButton
@@ -79,6 +81,7 @@ const TopNavigation: React.FC<TopNavigationProps> = (
                         sx={{
                             cursor: 'pointer',
                             width: '100%',
+                            maxWidth: "240px",
                             mt: 3,
                         }}
                     >
