@@ -16,35 +16,20 @@ meta:
 
 sections:
     - type: 'hero'
-      headline1: 'SCS Standards'
-      text1: '... where users can easily switch between different cloud service providers without being locked in.'
+      headline1: 'Standards'
+      text1: 'Offene Standards sind für das SCS-Projekt zentral. Sie ermöglichen allen Marktteilnehmern einfachen Zugang, Weiterentwicklung und Einsatz. Durch standardisierte Schnittstellen können Anwendungen mühelos migriert oder in verschiedenen Umgebungen betrieben werden. Für Cloud Service Provider schaffen offene Standards Kompatibilität und ein Netzwerk föderaler Cloud-Infrastrukturen, wie es z. B. die Deutsche Verwaltungscloudstrategie fordert. Anwender behalten die Kontrolle über ihre Daten und können ohne Vendor-Lock-in den Anbieter wechseln. So fördern offene Standards die digitale Souveränität und bilden die ideale Basis für erfolgreiche Digitalisierung im öffentlichen Sektor und in der Privatwirtschaft.'
 
     - type: 'second'
-      headline1: 'a platform...'
+      headline1: 'SCS Standards …'
       boxes:
-          - title: '... developed'
-            text: 'with cutting-edge technology to ensure seamless integration and optimal performance across different cloud environments.'
-          - title: '... operated'
-            text: 'by a cross-company team of experts dedicated to maintaining high availability, security, and continuous improvement, sharing operational knowledge.'
-          - title: '... standardized'
-            text: 'to ensure compatibility, security, and reliability across various data center operators with the option of certification.'
+          - title: '... aus der Community'
+            text: 'Sovereign Cloud Stack (SCS) ist ein Community-getriebenes Open-Source-Projekt, das Standards wie OpenInfra-Interoperabilitätsleitfäden und CNCF-Kubernetes-Konformität vereint.'
+          - title: '... in der Referenzimplementierung'
+            text: 'Die modulare und föderierbare SCS Open-Source-Referenzimplementierung integriert automatisch alle entwickelten Standards für IaaS und KaaS über verschiedene Anbieter und Rechenzentren hinweg.'
+          - title: '... in der Zusammenarbeit'
+            text: '2023 wurde die Kooperation mit dem ALASCA Verein gestartet, um offene Cloud-Standards voranzutreiben. Diese Standards fließen in die zugrundeliegenden Upstream-Projekte ein und können in Vanilla OpenStack oder Kubernetes Clouds implementiert werden.'
 
     - type: 'third'
-      headline1: '... built by many.'
-      text: 'collectively created by a global developer community, ensuring a diverse and innovative approach to solving complex cloud challenges without vendor lock-in.'
-
-    - type: 'fourth'
-      headline1: 'Digital sovereignty'
-      headline2: 'in the cloud'
-      text: 'enables organizations to control their data and maintain their independence from proprietary software.'
-      button:
-          label: 'Discover more →'
-          href: '/digital-sovereignity'
-      personas:
-          - title: '... public sector'
-            text: 'tailored solutions designed to meet the specific requirements of government agencies to ensure compliance and security sustainably.'
-          - title: '... industry'
-            text: 'robust industrial applications that utilize the cloud to enhance scalability, efficiency, and operational capability.'
-          - title: '... cloud service providers'
-            text: 'tools and resources for operators to effectively manage cloud resources to optimize costs and improve service.'
+      headline1: 'Zertifizierung'
+      text: 'SCS bietet einen Zertifizierungsrahmen, der Anbietern ermöglicht, ihre Konformität mit den Standards zu verifizieren und zu kommunizieren. Cloud Service Provider, die SCS nutzen, werden täglich automatisch getestet und transparent gemacht. Durch erfolgreiche Tests erhalten sie die SCS-Kompatibilitätszertifizierung. Auch Anbieter mit eigenen Implementierungen können sich zertifizieren lassen, indem sie die offenen Standards umsetzen. Zukünftig übernimmt das Forum SCS-Standards die Prüfung und Vergabe der Zertifizierungen.'
 ---
