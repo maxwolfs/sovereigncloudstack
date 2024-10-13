@@ -1,4 +1,4 @@
-name: Gatsby Publish
+name: Gatsby Build and Deploy to gh-pages branch
 
 on:
   workflow_dispatch:
@@ -12,9 +12,38 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: enriikke/gatsby-gh-pages-action@v2
+      # Checkout the repository
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # Set up Node.js for the Gatsby build
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          access-token: ${{ secrets.ACCESS_TOKEN }}
-          deploy-branch: gh-pages
-          
+          node-version: 18
+
+      # Cache dependencies to speed up builds
+      - name: Cache Node modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      # Install dependencies and build the Gatsby site
+      - name: Install dependencies and build site
+        run: |
+          npm ci
+          npm run build
+
+      # Deploy the built Gatsby site to GitHub Pages
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          publish_dir: ./public  # Gatsby builds the site in the 'public' folder
+          github_token: ${{ secrets.PAT }}  # Verwende den PAT Token für das Deployment
+          force_orphan: true
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          commit_message: 'Deploy Gatsby site'
