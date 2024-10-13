@@ -1,8 +1,8 @@
 ---
-title: 'Sovereign Cloud Stack'
+title: 'SCS Standards'
 
 language: 'en'
-page: 'index'
+page: 'standards'
 
 meta:
     viewport: 'width=device-width, initial-scale=1'
@@ -16,8 +16,7 @@ meta:
 
 sections:
     - type: 'hero'
-      headline1: 'imagine a'
-      headline2: 'cloud platform...'
+      headline1: 'SCS Standards'
       text1: '... where users can easily switch between different cloud service providers without being locked in.'
 
     - type: 'second'
@@ -40,7 +39,7 @@ sections:
       text: 'enables organizations to control their data and maintain their independence from proprietary software.'
       button:
           label: 'Discover more →'
-          href: '/standards'
+          href: '/digital-sovereignity'
       personas:
           - title: '... public sector'
             text: 'tailored solutions designed to meet the specific requirements of government agencies to ensure compliance and security sustainably.'

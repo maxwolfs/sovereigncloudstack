@@ -1,7 +1,7 @@
 ---
 title: 'Sovereign Cloud Stack'
-
 language: 'de'
+page: 'index'
 
 meta:
     viewport: 'width=device-width, initial-scale=1'
@@ -39,7 +39,7 @@ sections:
       text: 'ermöglicht Organisationen, Kontrolle über ihre Daten zu behalten und ihre Unabhängigkeit von proprietärer Software zu sichern.'
       button:
           label: 'Mehr erfahren →'
-          href: '/digitale-souveränität'
+          href: '/standards'
       personas:
           - title: '... öffentlicher Sektor'
             text: 'Maßgeschneiderte Lösungen, die speziell auf die Anforderungen von Behörden abgestimmt sind, um Compliance und Sicherheit langfristig zu gewährleisten.'

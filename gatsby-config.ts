@@ -36,7 +36,7 @@ const config: GatsbyConfig = {
             resolve: 'gatsby-source-filesystem',
             options: {
                 name: 'content',
-                path: './src/content/', // Path to your Markdown content files
+                path: `${__dirname}/src/content`,
             },
             __key: 'content',
         },
@@ -51,27 +51,18 @@ const config: GatsbyConfig = {
         {
             resolve: `gatsby-plugin-react-i18next`,
             options: {
-                localeJsonSourceName: 'locales', // name given to `gatsby-source-filesystem` plugin
                 languages: [`en`, `de`],
                 defaultLanguage: `en`,
                 siteUrl: `https://www.sovereigncloudstack.org`,
                 i18nextOptions: {
                     interpolation: {
-                        escapeValue: false, // not needed for react as it escapes by default
+                        escapeValue: false,
                     },
                     keySeparator: false,
                 },
                 pages: [
                     {
-                        matchPath: '/:lang?/index',
-                        getLanguageFromPath: true,
-                    },
-                    {
-                        matchPath: '/:lang?/blog/:uid',
-                        getLanguageFromPath: true,
-                    },
-                    {
-                        matchPath: '/:lang?/team/:uid',
+                        matchPath: '/:lang?/index', // Match the root path and language-specific root
                         getLanguageFromPath: true,
                     },
                 ],

@@ -3,12 +3,12 @@ import { useI18next } from 'gatsby-plugin-react-i18next';
 import { Box, NavLink, Text } from 'theme-ui';
 
 const LanguageSwitcher = () => {
-    const { language, changeLanguage } = useI18next();
+    const { language, changeLanguage, originalPath } = useI18next();
 
     return (
         <Box sx={{ alignSelf: 'center' }}>
             <NavLink
-                onClick={() => changeLanguage('de')}
+                onClick={() => changeLanguage('de', originalPath)}
                 sx={{
                     textDecoration: 'none',
                     color: 'text',
@@ -16,7 +16,7 @@ const LanguageSwitcher = () => {
                 }}
             >
                 <Text
-                    variant={language == 'en' ? 'body' : 'bold'}
+                    variant={language === 'en' ? 'body' : 'bold'}
                     sx={{ fontSize: [0, 1, 1, 2] }}
                 >
                     de
@@ -26,7 +26,7 @@ const LanguageSwitcher = () => {
                 {` / `}
             </Text>
             <NavLink
-                onClick={() => changeLanguage('en')}
+                onClick={() => changeLanguage('en', originalPath)}
                 sx={{
                     textDecoration: 'none',
                     color: 'text',
@@ -34,7 +34,7 @@ const LanguageSwitcher = () => {
                 }}
             >
                 <Text
-                    variant={language == 'de' ? 'body' : 'bold'}
+                    variant={language === 'de' ? 'body' : 'bold'}
                     sx={{ fontSize: [0, 1, 1, 2] }}
                 >
                     en

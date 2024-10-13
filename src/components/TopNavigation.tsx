@@ -85,7 +85,7 @@ const TopNavigation: React.FC<TopNavigationProps> = (
                         <img
                             alt='scs logo'
                             src='/logo/scs-horizontal-black.svg'
-                            onClick={() => navigate('#')}
+                            onClick={() => navigate('/')}
                             style={{ width: '100%' }}
                         />
                     </Box>

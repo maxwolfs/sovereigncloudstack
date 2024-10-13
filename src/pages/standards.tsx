@@ -91,7 +91,7 @@ export default function Home({ data, pageContext }: any) {
                     px: ['20px', '20px', '20px', '40px'],
                 }}
             >
-                <StaticImage
+                {/* <StaticImage
                     src='../images/bg3.webp' // Adjust to your actual image path in src
                     alt='Background'
                     layout='fullWidth'
@@ -104,7 +104,7 @@ export default function Home({ data, pageContext }: any) {
                         height: '100%',
                         zIndex: -1, // Send to background
                     }}
-                />
+                /> */}
 
                 <Grid
                     columns={[2, 4, 4, 6]}
@@ -440,18 +440,9 @@ export default function Home({ data, pageContext }: any) {
                                 >
                                     <NavLink
                                         onClick={() => {
-                                            let href =
-                                                content.sections[3].button.href;
-
-                                            // If language is not 'en', prepend the language prefix
-                                            if (
-                                                language !== 'en' &&
-                                                !href.startsWith(`/${language}`)
-                                            ) {
-                                                href = `/${language}${href}`;
-                                            }
-
-                                            navigate(href); // Navigate to the correct localized URL
+                                            navigate(
+                                                content.sections[3].button.href
+                                            );
                                         }}
                                         sx={{
                                             color: theme.colors?.primary,
@@ -515,7 +506,7 @@ export default function Home({ data, pageContext }: any) {
 export const query = graphql`
     query HomePageQuery($language: String!) {
         markdownRemark(
-            frontmatter: { language: { eq: $language }, page: { eq: "index" } }
+            frontmatter: { language: { eq: $language }, page: { eq: "standards" } }
         ) {
             frontmatter {
                 title
