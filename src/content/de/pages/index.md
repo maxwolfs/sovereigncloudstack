@@ -20,7 +20,7 @@ sections:
       text1: '... auf der Nutzer mühelos zwischen verschiedenen Anbietern wechseln können.'
 
     - type: 'second'
-      headline1: 'eine Platftorm...'
+      headline1: 'eine Plattorm...'
       boxes:
           - title: '... entwickelt'
             text: 'mit modernster Technologie konzipiert, um eine nahtlose Integration und optimale Performance in verschiedenen Cloud-Umgebungen zu ermöglichen.'
