@@ -17,7 +17,7 @@ columns:
     - title: 'News'
       links:
           - label: 'News'
-            url: 'https://scs.community/news/'
+            url: '/news'
           - label: 'Events'
             url: 'https://scs.community/events/'
     - title: 'Service'
