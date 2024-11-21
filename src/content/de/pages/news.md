@@ -1,11 +1,11 @@
 ---
+title: "Neuigkeiten"
+description: "Die neuesten Updates und Events der Sovereign Cloud Stack Community."
 language: "de"
 page: "news"
-title: "Aktuelles"
-description: "Alles Aktuelle zum Sovereign Cloud Stack."
 headline_events: "Veranstaltungen"
 headline_news: "Neuigkeiten"
-headline_blog: "Community Blog"
-more_news_button: "Weitere Neuigkeiten"
-
+headline_blog: "Blog"
+more_events_button: "Mehr Neuigkeiten ↓"
+more_button: "Mehr →"
 ---

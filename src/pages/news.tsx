@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 import MenuOverlay from '../components/MenuOverlay';
 import TopNavigation from '../components/TopNavigation';
 import CustomButton from '../components/CustomButton';
-import { formatGermanDate } from '../helpers/formatGermanDate';
+import { formatLocalizedDate } from '../helpers/formatLocalizedDate';
 
 // Definiere den Typ für `pageContext`
 interface CustomPageContext {
@@ -20,7 +20,8 @@ interface NewsPageData {
             headline_events: string;
             headline_news: string;
             headline_blog: string;
-            more_news_button: string;
+            more_events_button: string;
+            more_button: string;
         };
     };
     posts: {
@@ -143,8 +144,9 @@ const NewsPage: React.FC<PageProps<NewsPageData, CustomPageContext>> = ({
                                     }}
                                 >
                                     <Text sx={{ fontSize: 0 }}>
-                                        {formatGermanDate(
-                                            event.frontmatter.date
+                                        {formatLocalizedDate(
+                                            event.frontmatter.date,
+                                            language
                                         )}
                                     </Text>
                                 </Box>
@@ -189,7 +191,7 @@ const NewsPage: React.FC<PageProps<NewsPageData, CustomPageContext>> = ({
                                     },
                                 }}
                             >
-                                Mehr →
+                                {page.frontmatter.more_button}
                             </NavLink>
                         </Box>
                     ))}
@@ -207,20 +209,20 @@ const NewsPage: React.FC<PageProps<NewsPageData, CustomPageContext>> = ({
                             sx={{
                                 cursor: 'pointer',
                                 display: 'inline-block',
-                                backgroundColor: 'black', 
+                                backgroundColor: 'black',
                                 color: 'white',
                                 textDecoration: 'none',
                                 px: 3,
-                                py: 2, 
-                                fontSize: 1, 
-                                borderRadius: 0, 
-                                boxShadow: 'none', 
+                                py: 2,
+                                fontSize: 1,
+                                borderRadius: 0,
+                                boxShadow: 'none',
                                 '&:hover': {
                                     backgroundColor: 'secondary',
                                 },
                             }}
                         >
-                            Mehr Veranstaltungen ↓
+                            {page.frontmatter.more_events_button}
                         </NavLink>
                     </Box>
                 )}
@@ -254,7 +256,10 @@ const NewsPage: React.FC<PageProps<NewsPageData, CustomPageContext>> = ({
                                 variant='bold'
                                 sx={{ fontSize: 2, color: 'primary' }}
                             >
-                                {formatGermanDate(item.frontmatter.date)}
+                                {formatLocalizedDate(
+                                    item.frontmatter.date,
+                                    language
+                                )}{' '}
                             </Text>
                             <Text variant='heading' sx={{ fontSize: 3 }}>
                                 {item.frontmatter.title}
@@ -297,7 +302,10 @@ const NewsPage: React.FC<PageProps<NewsPageData, CustomPageContext>> = ({
                                 sx={{ fontSize: 2, color: 'primary' }}
                             >
                                 {item.frontmatter.author} -{' '}
-                                {formatGermanDate(item.frontmatter.date)}
+                                {formatLocalizedDate(
+                                    item.frontmatter.date,
+                                    language
+                                )}{' '}
                             </Text>
                             <Text variant='heading' sx={{ fontSize: 3 }}>
                                 {item.frontmatter.title}
@@ -327,7 +335,8 @@ export const query = graphql`
                 headline_events
                 headline_news
                 headline_blog
-                more_news_button
+                more_button
+                more_events_button
             }
         }
         posts: allMarkdownRemark(
