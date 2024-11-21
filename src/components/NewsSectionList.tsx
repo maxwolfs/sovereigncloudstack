@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Box, Grid, Text, NavLink } from 'theme-ui';
+import { Box, Grid, Text, NavLink, Image } from 'theme-ui';
 import { formatLocalizedDate } from '../helpers/formatLocalizedDate';
+import { StaticImage } from 'gatsby-plugin-image';
 
 interface NewsSectionListProps {
     items: Array<{
@@ -9,7 +10,10 @@ interface NewsSectionListProps {
             title: string;
             date: string;
             slug: string;
-            author?: string;
+            authors?: Array<{
+                name: string;
+                image: string;
+            }>;
         };
         excerpt: string;
     }>;
@@ -68,17 +72,37 @@ const NewsSectionList: React.FC<NewsSectionListProps> = ({
                             }}
                         >
                             <Box sx={{ gridColumn: ['1 / -1', null, '1 / 2'] }}>
-                                <Text sx={{ fontSize: 0 }}>
+                                <Text sx={{ fontSize: 0, fontWeight: '900' }}>
                                     {formatLocalizedDate(
                                         item.frontmatter.date,
                                         language
                                     )}
                                 </Text>
+                                {item.frontmatter.authors &&
+                                    item.frontmatter.authors.map(
+                                        (author, index) => (
+                                            <Box key={index}>
+                                                <Text
+                                                    variant='body'
+                                                    sx={{ fontSize: '12px' }}
+                                                >
+                                                    {author.name}
+                                                </Text>
+                                            </Box>
+                                        )
+                                    )}
                             </Box>
+
+                            {/* Title and Excerpt */}
                             <Box sx={{ gridColumn: ['1 / -1', null, '2 / 6'] }}>
-                                <Text variant='heading' sx={{ fontSize: 2 }}>
-                                    {item.frontmatter.title}
-                                </Text>
+                                <Box sx={{ mb: [2] }}>
+                                    <Text
+                                        variant='heading'
+                                        sx={{ fontSize: 2 }}
+                                    >
+                                        {item.frontmatter.title}
+                                    </Text>
+                                </Box>
                                 <Box
                                     sx={{
                                         maxWidth: [
@@ -94,6 +118,7 @@ const NewsSectionList: React.FC<NewsSectionListProps> = ({
                             </Box>
                         </Grid>
 
+                        {/* "Mehr" Button */}
                         <NavLink
                             href={`/${item.frontmatter.slug}`}
                             sx={{
@@ -134,7 +159,7 @@ const NewsSectionList: React.FC<NewsSectionListProps> = ({
                         sx={{
                             cursor: 'pointer',
                             display: 'inline-block',
-                            backgroundColor: 'black',
+                            backgroundColor: 'primary',
                             color: 'white',
                             textDecoration: 'none',
                             px: 3,

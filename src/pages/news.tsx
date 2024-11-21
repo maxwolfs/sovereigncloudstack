@@ -32,7 +32,10 @@ interface NewsPageData {
                 date: string;
                 type: string;
                 slug: string;
-                author?: string;
+                authors?: Array<{
+                    name: string;
+                    image: string;
+                }>;
             };
             excerpt: string;
         }>;
@@ -94,15 +97,6 @@ const NewsPage: React.FC<PageProps<NewsPageData, CustomPageContext>> = ({
                 }}
             >
                 <NewsSectionList
-                    items={events}
-                    headline={page.frontmatter.headline_events}
-                    language={language}
-                    moreButtonText={page.frontmatter.more_button}
-                    loadMoreItemsButtonText={
-                        page.frontmatter.more_events_button
-                    }
-                />
-                <NewsSectionList
                     items={news}
                     headline={page.frontmatter.headline_news}
                     language={language}
@@ -116,6 +110,15 @@ const NewsPage: React.FC<PageProps<NewsPageData, CustomPageContext>> = ({
                     moreButtonText={page.frontmatter.more_button}
                     loadMoreItemsButtonText={
                         page.frontmatter.more_blogPosts_button
+                    }
+                />
+                <NewsSectionList
+                    items={events}
+                    headline={page.frontmatter.headline_events}
+                    language={language}
+                    moreButtonText={page.frontmatter.more_button}
+                    loadMoreItemsButtonText={
+                        page.frontmatter.more_events_button
                     }
                 />
             </Box>
@@ -144,7 +147,7 @@ export const query = graphql`
         }
         posts: allMarkdownRemark(
             filter: { frontmatter: { language: { eq: $language } } }
-            sort: { frontmatter: { date: DESC } }
+            sort: { frontmatter: { date: ASC } }
         ) {
             nodes {
                 id
@@ -153,7 +156,10 @@ export const query = graphql`
                     date
                     type
                     slug
-                    author
+                    authors {
+                        name
+                        image
+                    }
                 }
                 excerpt(pruneLength: 150) # Automatically generate an excerpt
             }
