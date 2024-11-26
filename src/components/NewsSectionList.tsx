@@ -10,6 +10,7 @@ interface NewsSectionListProps {
             title: string;
             date: string;
             slug: string;
+            type: string;
             authors?: Array<{
                 name: string;
                 image: string;
@@ -30,7 +31,7 @@ const NewsSectionList: React.FC<NewsSectionListProps> = ({
     language,
     moreButtonText,
     loadMoreItemsButtonText,
-    initialVisibleItems = 3,
+    initialVisibleItems = 2,
 }) => {
     const [visibleItems, setVisibleItems] =
         useState<number>(initialVisibleItems);
@@ -120,7 +121,7 @@ const NewsSectionList: React.FC<NewsSectionListProps> = ({
 
                         {/* "Mehr" Button */}
                         <NavLink
-                            href={`/${item.frontmatter.slug}`}
+                            href={`/${item.frontmatter.type}/${item.frontmatter.slug}`}
                             sx={{
                                 display: 'inline-block',
                                 backgroundColor: 'black',

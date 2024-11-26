@@ -1,31 +1,41 @@
 import path from 'path';
 import { GatsbyNode } from 'gatsby';
 
+// Typdefinition für die GraphQL-Antwort
+interface MarkdownNode {
+    id: string;
+    frontmatter: {
+        type: string;
+        slug: string;
+        language: string;
+    };
+}
+
+interface GraphQLResult {
+    data?: {
+        allMarkdownRemark: {
+            nodes: MarkdownNode[];
+        };
+    };
+    errors?: any;
+}
+
+// GatsbyNode-Implementierung
 export const createPages: GatsbyNode['createPages'] = async ({
-    actions,
     graphql,
-    reporter,
+    actions,
 }) => {
     const { createPage } = actions;
 
-    const result = await graphql<{
-        allMarkdownRemark: {
-            nodes: Array<{
-                frontmatter: {
-                    slug: string | null;
-                    language: string | null;
-                    type: string | null;
-                };
-            }>;
-        };
-    }>(`
-        query FetchAllMarkdown {
+    const result: GraphQLResult = await graphql(`
+        {
             allMarkdownRemark {
                 nodes {
+                    id
                     frontmatter {
+                        type
                         slug
                         language
-                        type
                     }
                 }
             }
@@ -33,50 +43,65 @@ export const createPages: GatsbyNode['createPages'] = async ({
     `);
 
     if (result.errors) {
-        reporter.panicOnBuild('Error fetching markdown data', result.errors);
+        throw new Error('Error loading Markdown files: ' + result.errors);
+    }
+
+    const items = result.data?.allMarkdownRemark.nodes;
+
+    if (!items || items.length === 0) {
+        console.warn('No Markdown files found.');
         return;
     }
 
-    const posts = result.data?.allMarkdownRemark.nodes ?? [];
+    // Iteriere durch alle Markdown-Knoten und erstelle Seiten
+    items.forEach((node) => {
+        const { type, slug, language } = node.frontmatter;
 
-    posts.forEach((node, index) => {
-        const { slug, language, type } = node.frontmatter;
-
-        if (!slug || !language || !type) {
-            reporter.warn(
-                `Skipping creation for node #${index}: Missing slug, language, or type. Data: ${JSON.stringify(
-                    node.frontmatter
-                )}`
-            );
-            return;
+        let templatePath: string;
+        switch (type) {
+            case 'news':
+                templatePath = path.resolve('./src/templates/newsPost.tsx');
+                break;
+            case 'blog':
+                templatePath = path.resolve('./src/templates/blogPost.tsx');
+                break;
+            case 'event':
+                templatePath = path.resolve('./src/templates/eventPost.tsx');
+                break;
+            default:
+                console.warn(
+                    `Unknown type "${type}" for item with slug "${slug}". Skipping...`
+                );
+                return;
         }
 
-        let template = '';
-        if (type === 'news') {
-            template = path.resolve('./src/templates/newsPost.tsx');
-        } else if (type === 'event') {
-            template = path.resolve('./src/templates/eventPost.tsx');
-        } else if (type === 'blog') {
-            template = path.resolve('./src/templates/blogPost.tsx');
-        } else {
-            reporter.warn(`Unknown type "${type}" for node: ${slug}`);
-            return;
-        }
-
-        let pagePath = `/${slug}`; 
-        if (language === 'de') {
-            pagePath = `/de/${slug}`;
-        }
+        // let pagePath = `/${slug}`;
+        // if (language === 'de') {
+        //     pagePath = `/de/${slug}`;
+        // }
 
         createPage({
-            path: pagePath,
-            component: template,
+            path: `/${type}/${slug}`, // Beispiel: /de/news/osba-forum-scs-standards
+            component: templatePath,
             context: {
-                slug,
+                id: node.id,
                 language,
             },
         });
-
-        reporter.info(`Created page at ${pagePath}`);
     });
 };
+
+export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] =
+    ({ actions }) => {
+        const { createTypes } = actions;
+
+        createTypes(`
+    type MarkdownRemark implements Node {
+      frontmatter: Frontmatter
+    }
+
+    type Frontmatter {
+      cover_image: File @fileByRelativePath
+    }
+  `);
+    };

@@ -18,9 +18,13 @@ interface NewsPageData {
             headline_events: string;
             headline_news: string;
             headline_blog: string;
+            headline_conferences: string;
+            headline_press: string;
             more_events_button: string;
             more_news_button: string;
             more_blogPosts_button: string;
+            more_conferences_button: string;
+            more_press_button: string;
             more_button: string;
         };
     };
@@ -68,6 +72,12 @@ const NewsPage: React.FC<PageProps<NewsPageData, CustomPageContext>> = ({
     );
     const news = posts.nodes.filter((post) => post.frontmatter.type === 'news');
     const blog = posts.nodes.filter((post) => post.frontmatter.type === 'blog');
+    const conferences = posts.nodes.filter(
+        (post) => post.frontmatter.type === 'conferences'
+    );
+    const press = posts.nodes.filter(
+        (post) => post.frontmatter.type === 'press'
+    );
 
     return (
         <>
@@ -121,6 +131,22 @@ const NewsPage: React.FC<PageProps<NewsPageData, CustomPageContext>> = ({
                         page.frontmatter.more_events_button
                     }
                 />
+                <NewsSectionList
+                    items={conferences}
+                    headline={page.frontmatter.headline_conferences}
+                    language={language}
+                    moreButtonText={page.frontmatter.more_button}
+                    loadMoreItemsButtonText={
+                        page.frontmatter.more_conferences_button
+                    }
+                />
+                <NewsSectionList
+                    items={press}
+                    headline={page.frontmatter.headline_press}
+                    language={language}
+                    moreButtonText={page.frontmatter.more_button}
+                    loadMoreItemsButtonText={page.frontmatter.more_press_button}
+                />
             </Box>
 
             <Footer />
@@ -139,10 +165,14 @@ export const query = graphql`
                 headline_events
                 headline_news
                 headline_blog
+                headline_conferences
+                headline_press
                 more_button
                 more_news_button
                 more_blogPosts_button
                 more_events_button
+                more_conferences_button
+                more_press_button
             }
         }
         posts: allMarkdownRemark(
