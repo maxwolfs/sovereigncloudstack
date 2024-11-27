@@ -28,7 +28,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
     const { createPage } = actions;
 
     const result: GraphQLResult = await graphql(`
-        {
+        query FetchAllMarkdownData {
             allMarkdownRemark {
                 nodes {
                     id
@@ -36,6 +36,11 @@ export const createPages: GatsbyNode['createPages'] = async ({
                         type
                         slug
                         language
+                        featuredImage {
+                            childImageSharp {
+                                gatsbyImageData(width: 800)
+                            }
+                        }
                     }
                 }
             }
@@ -59,11 +64,15 @@ export const createPages: GatsbyNode['createPages'] = async ({
 
         let templatePath: string;
         switch (type) {
-            case 'news':
-                templatePath = path.resolve('./src/templates/newsPost.tsx');
+            case 'announcements':
+                templatePath = path.resolve(
+                    './src/templates/announcementPost.tsx'
+                );
                 break;
             case 'blog':
-                templatePath = path.resolve('./src/templates/blogPost.tsx');
+                templatePath = path.resolve(
+                    './src/templates/announcementPost.tsx'
+                );
                 break;
             case 'event':
                 templatePath = path.resolve('./src/templates/eventPost.tsx');
@@ -101,7 +110,18 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     }
 
     type Frontmatter {
-      cover_image: File @fileByRelativePath
+      title: String
+      date: Date @dateformat
+      language: String
+      type: String
+      slug: String
+      featuredImage: File @fileByRelativePath
+      authors: [Author]
+    }
+
+    type Author {
+      name: String
+      image: File @fileByRelativePath
     }
   `);
     };

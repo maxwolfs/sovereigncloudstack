@@ -16,12 +16,12 @@ interface NewsPageData {
             title: string;
             description: string;
             headline_events: string;
-            headline_news: string;
+            headline_announcements: string;
             headline_blog: string;
             headline_conferences: string;
             headline_press: string;
             more_events_button: string;
-            more_news_button: string;
+            more_announcements_button: string;
             more_blogPosts_button: string;
             more_conferences_button: string;
             more_press_button: string;
@@ -70,7 +70,7 @@ const NewsPage: React.FC<PageProps<NewsPageData, CustomPageContext>> = ({
     const events = posts.nodes.filter(
         (post) => post.frontmatter.type === 'event'
     );
-    const news = posts.nodes.filter((post) => post.frontmatter.type === 'news');
+    const announcements = posts.nodes.filter((post) => post.frontmatter.type === 'announcements');
     const blog = posts.nodes.filter((post) => post.frontmatter.type === 'blog');
     const conferences = posts.nodes.filter(
         (post) => post.frontmatter.type === 'conferences'
@@ -107,11 +107,11 @@ const NewsPage: React.FC<PageProps<NewsPageData, CustomPageContext>> = ({
                 }}
             >
                 <NewsSectionList
-                    items={news}
-                    headline={page.frontmatter.headline_news}
+                    items={announcements}
+                    headline={page.frontmatter.headline_announcements}
                     language={language}
                     moreButtonText={page.frontmatter.more_button}
-                    loadMoreItemsButtonText={page.frontmatter.more_news_button}
+                    loadMoreItemsButtonText={page.frontmatter.more_announcements_button}
                 />
                 <NewsSectionList
                     items={blog}
@@ -163,12 +163,12 @@ export const query = graphql`
                 title
                 description
                 headline_events
-                headline_news
+                headline_announcements
                 headline_blog
                 headline_conferences
                 headline_press
                 more_button
-                more_news_button
+                more_announcements_button
                 more_blogPosts_button
                 more_events_button
                 more_conferences_button
@@ -176,19 +176,36 @@ export const query = graphql`
             }
         }
         posts: allMarkdownRemark(
-            filter: { frontmatter: { language: { eq: $language } } }
-            sort: { frontmatter: { date: ASC } }
+            filter: {
+                frontmatter: {
+                    language: { eq: $language }
+                    type: {
+                        in: ["announcements", "blog", "event", "conferences", "press"]
+                    }
+                }
+            }
+            sort: { frontmatter: { date: DESC } }
         ) {
             nodes {
                 id
                 frontmatter {
                     title
-                    date
-                    type
+                    date(formatString: "MMMM DD, YYYY")
+                    language
                     slug
+                    type
                     authors {
                         name
-                        image
+                        image {
+                            childImageSharp {
+                                gatsbyImageData(layout: CONSTRAINED)
+                            }
+                        }
+                    }
+                    featuredImage {
+                        childImageSharp {
+                            gatsbyImageData(layout: CONSTRAINED)
+                        }
                     }
                 }
                 excerpt(pruneLength: 150) # Automatically generate an excerpt

@@ -1,5 +1,5 @@
 const theme = {
-    breakpoints: ['40em', '52em', '64em'],
+    breakpoints: ['30em', '52em', '74em'],
     space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
     fonts: {
         body: 'Dazzed',
@@ -53,7 +53,7 @@ const theme = {
             lineHeight: 'body',
             fontFeatureSettings: "'ss06'",
             wordWrap: 'break-word',
-            color: 'text'
+            color: 'text',
         },
         whiteBody: {
             fontFamily: 'body',
@@ -100,15 +100,22 @@ const theme = {
         },
     },
     links: {
-        nav: {
-            
-        }
+        nav: {},
     },
     styles: {
         root: {
             fontFamily: 'Dazzed',
             lineHeight: 'body',
             fontWeight: 'body',
+            wordBreak: 'break-word',
+            overflowWrap: 'break-word',
+        },
+        content: {
+            fontFamily: 'body',
+            fontWeight: 'body',
+            lineHeight: 'body',
+            fontSize: [2, 2, 3, 3], // Adjust the size to your preference
+            color: 'text',
         },
         h1: {
             variant: 'text.heading',
@@ -157,7 +164,7 @@ const theme = {
         td: {
             textAlign: 'left',
             borderBottomStyle: 'solid',
-        }
+        },
     },
 };
 
