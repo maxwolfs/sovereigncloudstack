@@ -95,6 +95,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
             context: {
                 id: node.id,
                 language,
+                slug
             },
         });
     });

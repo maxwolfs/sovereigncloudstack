@@ -98,6 +98,7 @@ const NewsPost: React.FC<NewsPostProps> = ({ data }) => {
                                         display: 'inline-flex',
                                         alignItems: 'center',
                                         gap: 2,
+                                        mr: 3
                                     }}
                                     key={index}
                                 >
@@ -107,7 +108,7 @@ const NewsPost: React.FC<NewsPostProps> = ({ data }) => {
                                                 width: '40px',
                                                 height: '40px',
                                                 borderRadius: '50%',
-                                                overflow: 'hidden', // Ensures the image stays within the circular boundary
+                                                overflow: 'hidden',
                                             }}
                                         >
                                             <GatsbyImage
@@ -116,7 +117,7 @@ const NewsPost: React.FC<NewsPostProps> = ({ data }) => {
                                                 style={{
                                                     width: '100%',
                                                     height: '100%',
-                                                    borderRadius: '50%', // Ensures the image itself is rounded
+                                                    borderRadius: '50%',
                                                 }}
                                             />
                                         </Box>
@@ -143,8 +144,10 @@ const NewsPost: React.FC<NewsPostProps> = ({ data }) => {
 };
 
 export const query = graphql`
-    query ($id: String!) {
-        markdownRemark(id: { eq: $id }) {
+    query ($slug: String!, $language: String!) {
+        markdownRemark(
+            frontmatter: { slug: { eq: $slug }, language: { eq: $language } }
+        ) {
             frontmatter {
                 title
                 date(formatString: "MMMM DD, YYYY")
