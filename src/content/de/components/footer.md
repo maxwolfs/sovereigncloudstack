@@ -17,7 +17,7 @@ columns:
           - label: 'Dokumentation'
             url: 'https://docs.scs.community'
           - label: 'News'
-            url: 'https://scs.community/news'
+            url: '/news'
     - title: 'Column 6'
       links:
           - label: 'Impressum'

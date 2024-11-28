@@ -50,7 +50,7 @@ const Footer: React.FC<FooterProps> = () => {
                     alignContent: 'center',
                     gridColumn: '1 / -1',
                     width: '100%',
-                    minHeight: '50vh',
+                    minHeight: '30vh',
                     mt: [0, 4, 4, 7],
                     py: 3,
                     bg: theme.colors?.primary,
