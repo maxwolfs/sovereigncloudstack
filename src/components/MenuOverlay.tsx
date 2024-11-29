@@ -18,6 +18,8 @@ const MenuOverlay: React.FC<MenuOverlayProps> = ({
     const { theme } = useThemeUI();
     const { language } = useI18next();
 
+    const currentYear = new Date().getFullYear();
+
     const data = useStaticQuery(graphql`
         query MenuOverlayQuery {
             allMarkdownRemark(
@@ -106,32 +108,42 @@ const MenuOverlay: React.FC<MenuOverlayProps> = ({
                             >
                                 {column.title}
                             </Text>
-                            {column.links.map((link: any, linkIndex: number) => (
-                                <Box key={linkIndex} my={[2, 2, 4, 4]}>
-                                    <NavLink
-                                        href={link.url}
-                                        sx={{ textDecoration: 'none' }}
-                                    >
-                                        <Text
-                                            variant='body'
+                            {column.links.map(
+                                (link: any, linkIndex: number) => (
+                                    <Box key={linkIndex} my={[2, 2, 4, 4]}>
+                                        <NavLink
+                                            key={linkIndex}
+                                            href={link.url}
                                             sx={{
-                                                cursor: 'pointer',
-                                                color: 'text',
+                                                variant: 'links.nav', // Use the custom variant
                                                 fontSize: [1, 2, 3, 3],
+                                                color: theme.colors?.text,
+                                                fontWeight: 400,
                                             }}
                                         >
                                             {link.label}
-                                        </Text>
-                                    </NavLink>
-                                </Box>
-                            ))}
+                                        </NavLink>
+                                    </Box>
+                                )
+                            )}
                         </Box>
                     ))}
                 </Grid>
             </Box>
 
             <Box sx={{ textAlign: 'center', mt: 4 }}>
-                Open Source Business Alliance
+                <NavLink
+                    href='https://osb-alliance.de'
+                    target='_blank'
+                    sx={{
+                        variant: 'links.nav', // Use the custom variant
+                        fontSize: [0, 1, 1, 1],
+                        color: theme.colors?.text,
+                        fontWeight: 400,
+                    }}
+                >
+                    © {currentYear} | Open Source Business Alliance
+                </NavLink>
             </Box>
         </Box>
     );

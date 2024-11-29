@@ -2,28 +2,34 @@
 locale: de
 component: menuOverlay
 columns:
-    - title: 'SCS entdecken'
+    - title: 'SCS Entdecken'
       links:
           - label: 'Über SCS'
-            url: 'https://scs.community/de/about/'
+            url: '/about'
           - label: 'SCS Standards'
             url: '/standards'
-          - label: 'SCS nutzen'
-            url: 'https://scs.community/de/use/'
-          - label: 'Team'
-            url: 'https://scs.community/employees/'
+          - label: 'In der Praxis'
+            url: '/sovereign-cloud-stack-in-action'
+          - label: 'Unser Netzwerk'
+            url: '/network'
           - label: 'Community'
             url: 'https://docs.scs.community/community'
-    - title: 'Aktuelles'
+          - label: 'Digitale Souveränität'
+            url: '/digital-sovereignty'
+    - title: 'Aktuelles & Highlights'
       links:
           - label: 'Neuigkeiten'
             url: '/news'
           - label: 'Veranstaltungen'
-            url: 'https://scs.community/de/events/'
-    - title: 'Service'
-      links:
-          - label: 'Presse'
-            url: 'https://scs.community/de/press/'
+            url: '/news#events'
           - label: 'Konferenzbeiträge'
-            url: 'https://scs.community/deconferences/'
+            url: '/news#conferences'
+          - label: 'Presse'
+            url: '/news#press'
+    - title: 'Rechtliches'
+      links:
+          - label: 'Datenschutz'
+            url: '/privacy'
+          - label: 'Impressum'
+            url: '/imprint'
 ---

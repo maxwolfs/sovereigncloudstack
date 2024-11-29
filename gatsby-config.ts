@@ -64,7 +64,7 @@ const config: GatsbyConfig = {
                     {
                         matchPath: '/:lang?/index', // Match the root path and language-specific root
                         getLanguageFromPath: true,
-                    },
+                    }
                 ],
             },
         },

@@ -2,26 +2,50 @@
 locale: en
 component: footer
 columns:
-    - title: 'Column 1'
+    - title: '' # Left empty, just for the icons
       links:
-    - title: 'Column 2'
+          - label: 'YouTube'
+            url: 'https://youtube.com'
+            icon: '/icons/youtube-white.svg'
+          - label: 'GitHub'
+            url: 'https://github.com'
+            icon: '/icons/github-white.svg'
+          - label: 'LinkedIn'
+            url: 'https://linkedin.com'
+            icon: '/icons/linkedin-white.svg'
+          - label: 'Matrix'
+            url: 'https://matrix.org'
+            icon: '/icons/matrix-white.svg'
+    - title: '' # Empty column
+      links: []
+    - title: 'Discover SCS'
       links:
-    - title: 'Column 3'
+          - label: 'About SCS'
+            url: '/about'
+          - label: 'SCS Standards'
+            url: '/standards'
+          - label: 'Digital Sovereignty'
+            url: '/digital-sovereignty'
+    - title: 'Current Topics'
       links:
-    - title: 'Column 4'
-      links:
-    - title: 'Column 5'
+          - label: 'News'
+            url: '/news'
+          - label: 'Events'
+            url: '/news#events'
+          - label: 'Conferences'
+            url: '/news#conferences'
+    - title: 'Network'
       links:
           - label: 'Community'
             url: 'https://docs.scs.community/community'
           - label: 'Documentation'
             url: 'https://docs.scs.community'
-          - label: 'News'
-            url: '/news'
-    - title: 'Column 6'
+          - label: 'Our Network'
+            url: '/network'
+    - title: 'Legal'
       links:
           - label: 'Imprint'
-            url: 'https://scs.community/imprint'
-          - label: 'Data Protection'
-            url: 'https://scs.community/dataprotection'
+            url: '/imprint'
+          - label: 'Privacy Policy'
+            url: '/privacy'
 ---

@@ -26,9 +26,7 @@ const CustomButton: React.FC<ButtonProps> = (props: ButtonProps) => {
                     variant: 'buttons.' + variant,
                 }}
             >
-                <Text variant='' sx={{ fontSize: [0, 1, 2, 2] }}>
-                    {label}
-                </Text>
+                <Text sx={{ fontSize: [0, 1, 2, 2] }}>{label}</Text>
             </Box>
         </a>
     );

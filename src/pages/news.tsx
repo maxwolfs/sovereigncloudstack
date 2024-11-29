@@ -17,12 +17,10 @@ interface NewsPageData {
             description: string;
             headline_events: string;
             headline_announcements: string;
-            headline_blog: string;
             headline_conferences: string;
             headline_press: string;
             more_events_button: string;
             more_announcements_button: string;
-            more_blogPosts_button: string;
             more_conferences_button: string;
             more_press_button: string;
             more_button: string;
@@ -34,7 +32,7 @@ interface NewsPageData {
             frontmatter: {
                 title: string;
                 date: string;
-                type: string;
+                postType: string;
                 slug: string;
                 authors?: Array<{
                     name: string;
@@ -68,15 +66,17 @@ const NewsPage: React.FC<PageProps<NewsPageData, CustomPageContext>> = ({
 
     // Filter posts by type
     const events = posts.nodes.filter(
-        (post) => post.frontmatter.type === 'event'
+        (post) => post.frontmatter.postType === 'event'
     );
-    const announcements = posts.nodes.filter((post) => post.frontmatter.type === 'announcements');
-    const blog = posts.nodes.filter((post) => post.frontmatter.type === 'blog');
+    const announcements = posts.nodes.filter(
+        (post) => post.frontmatter.postType === 'announcements'
+    );
+    const blog = posts.nodes.filter((post) => post.frontmatter.postType === 'blog');
     const conferences = posts.nodes.filter(
-        (post) => post.frontmatter.type === 'conferences'
+        (post) => post.frontmatter.postType === 'conferences'
     );
     const press = posts.nodes.filter(
-        (post) => post.frontmatter.type === 'press'
+        (post) => post.frontmatter.postType === 'press'
     );
 
     return (
@@ -111,17 +111,10 @@ const NewsPage: React.FC<PageProps<NewsPageData, CustomPageContext>> = ({
                     headline={page.frontmatter.headline_announcements}
                     language={language}
                     moreButtonText={page.frontmatter.more_button}
-                    loadMoreItemsButtonText={page.frontmatter.more_announcements_button}
-                />
-                {/* <NewsSectionList
-                    items={blog}
-                    headline={page.frontmatter.headline_blog}
-                    language={language}
-                    moreButtonText={page.frontmatter.more_button}
                     loadMoreItemsButtonText={
-                        page.frontmatter.more_blogPosts_button
+                        page.frontmatter.more_announcements_button
                     }
-                /> */}
+                />
                 <NewsSectionList
                     items={events}
                     headline={page.frontmatter.headline_events}
@@ -157,19 +150,20 @@ const NewsPage: React.FC<PageProps<NewsPageData, CustomPageContext>> = ({
 export const query = graphql`
     query NewsPageQuery($language: String!) {
         page: markdownRemark(
-            frontmatter: { language: { eq: $language }, page: { eq: "news" } }
+            frontmatter: {
+                language: { eq: $language }
+                template: { eq: "newsPage" }
+            }
         ) {
             frontmatter {
                 title
                 description
                 headline_events
                 headline_announcements
-                headline_blog
                 headline_conferences
                 headline_press
                 more_button
                 more_announcements_button
-                more_blogPosts_button
                 more_events_button
                 more_conferences_button
                 more_press_button
@@ -179,8 +173,13 @@ export const query = graphql`
             filter: {
                 frontmatter: {
                     language: { eq: $language }
-                    type: {
-                        in: ["announcements", "blog", "event", "conferences", "press"]
+                    postType: {
+                        in: [
+                            "announcements"
+                            "event"
+                            "conferences"
+                            "press"
+                        ]
                     }
                 }
             }
@@ -193,7 +192,7 @@ export const query = graphql`
                     date(formatString: "MMMM DD, YYYY")
                     language
                     slug
-                    type
+                    postType
                     authors {
                         name
                         image {

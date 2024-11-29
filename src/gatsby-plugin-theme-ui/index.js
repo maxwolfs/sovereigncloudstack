@@ -100,7 +100,16 @@ const theme = {
         },
     },
     links: {
-        nav: {},
+        nav: {
+            textDecoration: 'none',
+            color: 'background', // Set to white by default
+            fontSize: 1,
+            fontWeight: 'bold',
+            '&:hover': {
+                color: 'secondary', // Hover to secondary color (e.g., green)
+                textDecoration: 'none', // Remove underline
+            },
+        },
     },
     styles: {
         root: {

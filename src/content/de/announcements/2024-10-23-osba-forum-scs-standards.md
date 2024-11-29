@@ -1,11 +1,12 @@
 ---
-type: announcements
+postType: announcements
 title: 'Sovereign Cloud Stack (SCS) wird nachhaltig abgesichert'
 date: '2024-10-23'
 language: 'de'
 authors:
     - name: 'Lisa Reisch'
 slug: 'osba-forum-scs-standards'
+template: 'post'
 ---
 
 ## OSBA und Mitgliedsunternehmen gründen das Forum SCS-Standards

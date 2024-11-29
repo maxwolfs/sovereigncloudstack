@@ -1,5 +1,5 @@
 ---
-type: announcements
+postType: announcements
 title: 'Collaboration on Cloud Standards'
 date: '2023-11-27'
 language: 'en'
@@ -10,6 +10,7 @@ authors:
       image: '../../../images/authors/mariusfeldmann.webp'
 featuredImage: '../../../images/Handshake_SCS_ALASCA.png'
 slug: 'joint-standardization'
+template: 'post'
 ---
 
 ## Collaboration on Cloud Standards

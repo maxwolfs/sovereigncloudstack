@@ -1,7 +1,7 @@
 ---
 title: 'Sovereign Cloud Stack'
 language: 'de'
-page: 'index'
+template: "indexPage"
 
 meta:
     viewport: 'width=device-width, initial-scale=1'

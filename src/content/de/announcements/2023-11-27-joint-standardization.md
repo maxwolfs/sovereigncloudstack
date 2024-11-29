@@ -1,15 +1,16 @@
 ---
-type: announcements
+postType: 'announcements'
+template: 'post'
+slug: 'joint-standardization'
+language: 'de'
 title: 'Zusammenarbeit bei Cloud Standards'
 date: '2023-11-27'
-language: 'de'
 authors:
     - name: 'Kurt Garloff'
       image: '../../../images/authors/kurtgarloff.webp'
     - name: 'Marius Feldmann'
       image: '../../../images/authors/mariusfeldmann.webp'
 featuredImage: '../../../images/Handshake_SCS_ALASCA.png'
-slug: 'joint-standardization'
 ---
 
 ## Zusammenarbeit bei Cloud Standards

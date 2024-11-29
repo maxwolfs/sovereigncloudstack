@@ -493,7 +493,10 @@ export default function Home({ data, pageContext }: any) {
 export const query = graphql`
     query HomePageQuery($language: String!) {
         markdownRemark(
-            frontmatter: { language: { eq: $language }, page: { eq: "index" } }
+            frontmatter: {
+                language: { eq: $language }
+                template: { eq: "indexPage" }
+            }
         ) {
             frontmatter {
                 title

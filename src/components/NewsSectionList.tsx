@@ -10,7 +10,7 @@ interface NewsSectionListProps {
             title: string;
             date: string;
             slug: string;
-            type: string;
+            postType: string;
             authors?: Array<{
                 name: string;
                 image: string;
@@ -121,7 +121,7 @@ const NewsSectionList: React.FC<NewsSectionListProps> = ({
 
                         {/* "Mehr" Button */}
                         <NavLink
-                            href={`/${item.frontmatter.type}/${item.frontmatter.slug}`}
+                            href={`/${item.frontmatter.postType}/${item.frontmatter.slug}`}
                             sx={{
                                 display: 'inline-block',
                                 backgroundColor: 'black',
@@ -137,6 +137,7 @@ const NewsSectionList: React.FC<NewsSectionListProps> = ({
                                 boxShadow: 'none',
                                 '&:hover': {
                                     backgroundColor: 'secondary',
+                                    color: 'primary'
                                 },
                             }}
                         >
@@ -170,6 +171,7 @@ const NewsSectionList: React.FC<NewsSectionListProps> = ({
                             boxShadow: 'none',
                             '&:hover': {
                                 backgroundColor: 'secondary',
+                                color: 'primary'
                             },
                         }}
                     >

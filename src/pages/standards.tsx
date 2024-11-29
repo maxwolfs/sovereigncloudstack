@@ -280,7 +280,7 @@ export const query = graphql`
         markdownRemark(
             frontmatter: {
                 language: { eq: $language }
-                page: { eq: "standards" }
+                template: { eq: "standardsPage" }
             }
         ) {
             frontmatter {

@@ -1,13 +1,13 @@
 import path from 'path';
 import { GatsbyNode } from 'gatsby';
 
-// Typdefinition für die GraphQL-Antwort
 interface MarkdownNode {
     id: string;
     frontmatter: {
-        type: string;
+        template: string; // staticPage, post
         slug: string;
         language: string;
+        postType?: string; // announcements, event, blog
     };
 }
 
@@ -20,7 +20,6 @@ interface GraphQLResult {
     errors?: any;
 }
 
-// GatsbyNode-Implementierung
 export const createPages: GatsbyNode['createPages'] = async ({
     graphql,
     actions,
@@ -33,14 +32,10 @@ export const createPages: GatsbyNode['createPages'] = async ({
                 nodes {
                     id
                     frontmatter {
-                        type
+                        template
                         slug
                         language
-                        featuredImage {
-                            childImageSharp {
-                                gatsbyImageData(width: 800)
-                            }
-                        }
+                        postType
                     }
                 }
             }
@@ -58,46 +53,45 @@ export const createPages: GatsbyNode['createPages'] = async ({
         return;
     }
 
-    // Iteriere durch alle Markdown-Knoten und erstelle Seiten
     items.forEach((node) => {
-        const { type, slug, language } = node.frontmatter;
+        const { template, slug, language, postType } = node.frontmatter;
+
+        console.log(`Processing node: ${JSON.stringify(node.frontmatter)}`);
 
         let templatePath: string;
-        switch (type) {
-            case 'announcements':
-                templatePath = path.resolve(
-                    './src/templates/announcementPost.tsx'
-                );
+
+        switch (template) {
+            case 'staticPage':
+                templatePath = path.resolve('./src/templates/staticPage.tsx');
                 break;
-            case 'blog':
+            case 'post':
+                if (!postType) {
+                    console.warn(`Post missing postType: ${slug}`);
+                    return;
+                }
                 templatePath = path.resolve(
-                    './src/templates/announcementPost.tsx'
+                    `./src/templates/${postType}Post.tsx`
                 );
-                break;
-            case 'event':
-                templatePath = path.resolve('./src/templates/eventPost.tsx');
                 break;
             default:
-                console.warn(
-                    `Unknown type "${type}" for item with slug "${slug}". Skipping...`
-                );
+                console.warn(`Unknown template: ${template} for ${slug}`);
                 return;
         }
 
-        // let pagePath = `/${slug}`;
-        // if (language === 'de') {
-        //     pagePath = `/de/${slug}`;
-        // }
+        const pagePath =
+            template === 'post' ? `/${postType}/${slug}` : `/${slug}`
 
         createPage({
-            path: `/${type}/${slug}`, // Beispiel: /de/news/osba-forum-scs-standards
+            path: pagePath,
             component: templatePath,
             context: {
                 id: node.id,
                 language,
-                slug
+                slug,
             },
         });
+
+        console.log(`Created page: ${pagePath} with template: ${templatePath}`);
     });
 };
 
@@ -106,23 +100,24 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
         const { createTypes } = actions;
 
         createTypes(`
-    type MarkdownRemark implements Node {
-      frontmatter: Frontmatter
-    }
+            type MarkdownRemark implements Node {
+                frontmatter: Frontmatter
+            }
 
-    type Frontmatter {
-      title: String
-      date: Date @dateformat
-      language: String
-      type: String
-      slug: String
-      featuredImage: File @fileByRelativePath
-      authors: [Author]
-    }
+            type Frontmatter {
+                title: String
+                date: Date @dateformat
+                language: String
+                template: String
+                slug: String
+                postType: String
+                featuredImage: File @fileByRelativePath
+                authors: [Author]
+            }
 
-    type Author {
-      name: String
-      image: File @fileByRelativePath
-    }
-  `);
+            type Author {
+                name: String
+                image: File @fileByRelativePath
+            }
+        `);
     };

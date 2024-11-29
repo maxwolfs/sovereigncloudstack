@@ -1,11 +1,12 @@
 ---
-type: announcements
+postType: announcements
 title: 'Sovereign Cloud Stack (SCS) sustainable future'
 date: '2024-10-23'
 language: 'en'
 authors:
     - name: 'Lisa Reisch'
 slug: 'osba-forum-scs-standards'
+template: 'post'
 ---
 
 ## OSBA and members found the forum SCS-Standards
