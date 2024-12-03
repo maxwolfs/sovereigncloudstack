@@ -26,11 +26,8 @@ const TopNavigation: React.FC<TopNavigationProps> = (
                 left: 0,
                 zIndex: 1000,
                 width: '100%',
-                // bg: theme.colors?.background,
-                // pt: showOverlay ? 0 : 3
                 py: 3,
-                // background: theme.colors?.boxBackground,
-                // boxShadow: theme.colors?.boxShadow,
+                backgroundColor: theme.colors?.background
             }}
         >
             <Box
@@ -45,12 +42,11 @@ const TopNavigation: React.FC<TopNavigationProps> = (
             >
                 <Box
                     sx={{
-                        alignSelf: 'flex-start',
-                        background: theme.colors?.background,
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 3,
                     }}
                 >
-                    <LanguageSwitcher />
-
                     <Box
                         sx={{
                             cursor: 'pointer',
@@ -64,6 +60,7 @@ const TopNavigation: React.FC<TopNavigationProps> = (
                             {showOverlay ? '✕' : '☰'}
                         </Text>
                     </Box>
+                    <LanguageSwitcher />
                 </Box>
                 <Box
                     sx={{
@@ -72,17 +69,18 @@ const TopNavigation: React.FC<TopNavigationProps> = (
                         background: theme.colors?.background,
                     }}
                 >
-                    <CustomButton
+                    {/* <CustomButton
                         variant='secondary'
                         label='Zur SCS-Dokumentation →'
                         href='https://docs.scs.community'
-                    />
+                    /> */}
                     <Box
                         sx={{
                             cursor: 'pointer',
                             width: '100%',
-                            maxWidth: "240px",
+                            maxWidth: '240px',
                             mt: 3,
+                            mr: 4
                         }}
                     >
                         <img

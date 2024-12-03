@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { PageProps, graphql } from 'gatsby';
-import MenuOverlay from '../components/MenuOverlay';
-import TopNavigation from '../components/TopNavigation';
-import { Box } from 'theme-ui';
-import Footer from '../components/Footer';
+import Layout from '../components/Layout';
+import { Box, Text } from 'theme-ui';
 
 interface CustomPageContext {
     language: string;
@@ -13,7 +11,6 @@ type StaticPageQueryData = {
     markdownRemark: {
         frontmatter: {
             title: string;
-            language: string;
         };
         html: string;
     };
@@ -21,54 +18,31 @@ type StaticPageQueryData = {
 
 const StaticPage: React.FC<
     PageProps<StaticPageQueryData, CustomPageContext>
-> = ({ data, pageContext }) => {
-    const { markdownRemark } = data;
-    const { frontmatter, html } = markdownRemark;
-
-    const { language } = pageContext; // **Prüfe den Kontext hier**
-    const [showOverlay, setShowOverlay] = useState<boolean>(false);
-    const [logoSrc, setLogoSrc] = useState('/logo/scs-horizontal-black.svg');
-    
-    useEffect(() => {
-        if (showOverlay) {
-            document.body.classList.add('no-scroll');
-        } else {
-            document.body.classList.remove('no-scroll');
-        }
-        return () => {
-            document.body.classList.remove('no-scroll');
-        };
-    }, [showOverlay]);
+> = ({ data }) => {
+    const { frontmatter, html } = data.markdownRemark;
 
     return (
-        <>
-            {showOverlay && (
-                <MenuOverlay
-                    showOverlay={showOverlay}
-                    setShowOverlay={setShowOverlay}
-                    logoSrc={logoSrc}
-                />
-            )}
-
-            <TopNavigation
-                setShowOverlay={setShowOverlay}
-                logoSrc={logoSrc}
-                showOverlay={showOverlay}
-            />
-
-            <Box
-                sx={{
-                    maxWidth: '1920px',
-                    m: 'auto',
-                    my: 7,
-                    px: ['20px', '20px', '20px', '40px'],
+        <Layout>
+            <div
+                style={{
+                    maxWidth: '1200px',
+                    margin: '0 auto',
+                    padding: '20px',
                 }}
             >
-                <h1>{frontmatter.title}</h1>
+                <Box mb={5}>
+                    <Text
+                        variant='heading'
+                        sx={{
+                            fontSize: [6, 7, 7, 8],
+                        }}
+                    >
+                        {frontmatter.title}
+                    </Text>
+                </Box>
                 <div dangerouslySetInnerHTML={{ __html: html }} />
-            </Box>
-            <Footer />
-        </>
+            </div>
+        </Layout>
     );
 };
 
@@ -79,7 +53,6 @@ export const query = graphql`
         ) {
             frontmatter {
                 title
-                language
             }
             html
         }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, Grid, NavLink, Text, useThemeUI } from 'theme-ui';
 import TopNavigation from './TopNavigation';
 import { useStaticQuery, graphql } from 'gatsby';
@@ -52,6 +52,20 @@ const MenuOverlay: React.FC<MenuOverlayProps> = ({
 
     const columns = menuContent.frontmatter.columns;
 
+    // Disable body scroll when overlay is open
+    useEffect(() => {
+        if (showOverlay) {
+            document.body.style.overflow = 'hidden'; // Disable scrolling
+        } else {
+            document.body.style.overflow = ''; // Re-enable scrolling
+        }
+
+        // Cleanup when component unmounts
+        return () => {
+            document.body.style.overflow = '';
+        };
+    }, [showOverlay]);
+
     if (!showOverlay) {
         return null;
     }
@@ -91,7 +105,7 @@ const MenuOverlay: React.FC<MenuOverlayProps> = ({
                 }}
             >
                 <Grid
-                    columns={[1, 3]}
+                    columns={[1, 1, 3, 3]}
                     gap={[4, 6]}
                     sx={{
                         width: '100%',
@@ -115,7 +129,7 @@ const MenuOverlay: React.FC<MenuOverlayProps> = ({
                                             key={linkIndex}
                                             href={link.url}
                                             sx={{
-                                                variant: 'links.nav', // Use the custom variant
+                                                variant: 'links.nav',
                                                 fontSize: [1, 2, 3, 3],
                                                 color: theme.colors?.text,
                                                 fontWeight: 400,
@@ -136,7 +150,7 @@ const MenuOverlay: React.FC<MenuOverlayProps> = ({
                     href='https://osb-alliance.de'
                     target='_blank'
                     sx={{
-                        variant: 'links.nav', // Use the custom variant
+                        variant: 'links.nav',
                         fontSize: [0, 1, 1, 1],
                         color: theme.colors?.text,
                         fontWeight: 400,

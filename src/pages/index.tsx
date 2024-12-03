@@ -6,32 +6,20 @@ import TopNavigation from '../components/TopNavigation';
 import CustomButton from '../components/CustomButton';
 import Footer from '../components/Footer';
 import { StaticImage } from 'gatsby-plugin-image';
+import Layout from '../components/Layout';
 
 export default function Home({ data, pageContext }: any) {
     const { language } = pageContext;
     const { theme } = useThemeUI();
-    const [showOverlay, setShowOverlay] = useState<boolean>(false);
-    const [logoSrc, setLogoSrc] = useState('/logo/scs-horizontal-black.svg'); // Default image
 
     const content = data.markdownRemark.frontmatter;
-
-    useEffect(() => {
-        if (showOverlay) {
-            document.body.classList.add('no-scroll');
-        } else {
-            document.body.classList.remove('no-scroll');
-        }
-        return () => {
-            document.body.classList.remove('no-scroll');
-        };
-    }, [showOverlay]);
 
     if (!content || !content.meta || !content.sections) {
         return <div>Error: Content is missing!</div>; // Optionally, replace this with a loading state
     }
 
     return (
-        <>
+        <Layout>
             <title>{content.title} – </title>
             <meta name='viewport' content={content.meta.viewport} />
             <meta name='description' content={content.meta.description} />
@@ -46,26 +34,11 @@ export default function Home({ data, pageContext }: any) {
             <meta property='og:image' content={content.meta.og_image} />
             <link rel='icon' href='/favicon.png' />
 
-            {showOverlay && (
-                <MenuOverlay
-                    showOverlay={showOverlay}
-                    setShowOverlay={setShowOverlay}
-                    logoSrc={logoSrc}
-                />
-            )}
-
-            <TopNavigation
-                setShowOverlay={setShowOverlay}
-                logoSrc={logoSrc}
-                showOverlay={showOverlay}
-            />
-
             {/* Hero Section */}
             <Box
                 sx={{
                     maxWidth: '1920px',
                     m: 'auto',
-                    mt: 6,
                     px: ['20px', '20px', '20px', '40px'],
                 }}
             >
@@ -350,6 +323,9 @@ export default function Home({ data, pageContext }: any) {
                     pt: [5, 5, 5, 6],
                     mb: [4, 4, 4, 6],
                     px: ['20px', '20px', '20px', '40px'],
+                    position: 'relative',
+                    width: '100%',
+                    height: '100%',
                 }}
             >
                 <StaticImage
@@ -485,9 +461,7 @@ export default function Home({ data, pageContext }: any) {
                     )}
                 </Grid>
             </Box>
-
-            <Footer />
-        </>
+        </Layout>
     );
 }
 export const query = graphql`

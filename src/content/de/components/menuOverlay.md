@@ -6,6 +6,8 @@ columns:
       links:
           - label: 'Über SCS'
             url: '/about'
+          - label: 'Dokumentation'
+            url: '/https://docs.scs.community'
           - label: 'SCS Standards'
             url: '/standards'
           - label: 'In der Praxis'

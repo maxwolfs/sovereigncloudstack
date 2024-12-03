@@ -41,107 +41,125 @@ const Footer: React.FC = () => {
     const columns = footerContent.frontmatter.columns;
 
     return (
-        <Grid
-            columns={[1, 1, 6, 6]}
-            gap={[4, 20, 20, 40]}
+        <Box
             sx={{
-                alignContent: 'center',
-                gridColumn: '1 / -1',
-                width: '100%',
-                minHeight: '30vh',
-                mt: [0, 4, 4, 7],
-                py: 3,
                 bg: theme.colors?.primary,
+                py: 5,
                 px: ['20px', '20px', '20px', '40px'],
-
             }}
         >
-            {/* Social Media Icons in the first column */}
+            {/* Wrapper for maxWidth */}
             <Box
                 sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'flex-start',
-                    gap: 3,
-                    gridColumn: ['1 / -1', '1 / -1', '1 / 2', '1 / 2'],
+                    maxWidth: '1920px',
+                    mx: 'auto', // Centers the content horizontally
                 }}
             >
-                {columns[0]?.links &&
-                    columns[0].links.map((link: any, index: number) => (
-                        <a
-                            key={index}
-                            href={link.url}
-                            target='_blank'
-                            rel='noopener noreferrer'
-                            style={{
-                                display: 'inline-block',
-                                textDecoration: 'none',
-                            }}
-                        >
-                            <Box
-                                sx={{
-                                    width: '36px',
-                                    height: '36px',
-                                    transition: 'all 0.3s ease-in-out',
-                                    ':hover': {
-                                        filter: 'invert(50%) sepia(100%) saturate(1000%) hue-rotate(200deg)', // Secondary color filter
-                                    },
-                                }}
-                            >
-                                <img
-                                    src={link.icon}
-                                    alt={link.label}
-                                    style={{
-                                        width: '36px',
-                                        height: '36px',
-                                    }}
-                                />
-                            </Box>
-                        </a>
-                    ))}
-            </Box>
-
-            {/* Other columns */}
-            {columns.slice(1).map((column: any, columnIndex: number) => (
-                <Box
-                    key={columnIndex}
+                <Grid
+                    columns={[1, 1, 6, 6]}
+                    gap={[4, 4, 20, 40]}
                     sx={{
-                        gridColumn: [
-                            '1 / -1',
-                            '1 / -1',
-                            `${columnIndex + 2} / ${columnIndex + 3}`,
-                            `${columnIndex + 2} / ${columnIndex + 3}`,
-                        ],
+                        alignContent: 'center',
+                        width: '100%',
                     }}
                 >
-                    {column.links && (
-                        <Box sx={{ display: 'grid' }}>
-                            <Box sx={{ mb: 3 }}>
-                                <Text
-                                    variant='heading'
-                                    sx={{ color: theme.colors?.background }}
+                    {/* Social Media Icons in the first column */}
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'flex-start',
+                            gap: 3,
+                            gridColumn: ['1 / -1', '1 / -1', '1 / 2', '1 / 2'],
+                        }}
+                    >
+                        {columns[0]?.links &&
+                            columns[0].links.map((link: any, index: number) => (
+                                <a
+                                    key={index}
+                                    href={link.url}
+                                    target='_blank'
+                                    rel='noopener noreferrer'
+                                    style={{
+                                        display: 'inline-block',
+                                        textDecoration: 'none',
+                                    }}
                                 >
-                                    {column.title}
-                                </Text>
-                            </Box>
-                            {column.links.map(
-                                (link: any, linkIndex: number) => (
-                                    <NavLink
-                                        key={linkIndex}
-                                        href={link.url}
+                                    <Box
                                         sx={{
-                                            variant: 'links.nav', // Use the custom variant
+                                            width: '36px',
+                                            height: '36px',
+                                            transition: 'all 0.3s ease-in-out',
+                                            ':hover': {
+                                                filter: 'invert(50%) sepia(100%) saturate(1000%) hue-rotate(200deg)', // Secondary color filter
+                                            },
                                         }}
                                     >
-                                        {link.label}
-                                    </NavLink>
-                                )
-                            )}
-                        </Box>
-                    )}
-                </Box>
-            ))}
-        </Grid>
+                                        <img
+                                            src={link.icon}
+                                            alt={link.label}
+                                            style={{
+                                                width: '36px',
+                                                height: '36px',
+                                            }}
+                                        />
+                                    </Box>
+                                </a>
+                            ))}
+                    </Box>
+
+                    {/* Other columns */}
+                    {columns
+                        .slice(1)
+                        .map((column: any, columnIndex: number) => (
+                            <Box
+                                key={columnIndex}
+                                sx={{
+                                    gridColumn: [
+                                        '1 / -1',
+                                        '1 / -1',
+                                        `${columnIndex + 2} / ${
+                                            columnIndex + 3
+                                        }`,
+                                        `${columnIndex + 2} / ${
+                                            columnIndex + 3
+                                        }`,
+                                    ],
+                                }}
+                            >
+                                {column.links && (
+                                    <Box sx={{ display: 'grid' }}>
+                                        <Box sx={{ mb: 3 }}>
+                                            <Text
+                                                variant='heading'
+                                                sx={{
+                                                    color: theme.colors
+                                                        ?.background,
+                                                }}
+                                            >
+                                                {column.title}
+                                            </Text>
+                                        </Box>
+                                        {column.links.map(
+                                            (link: any, linkIndex: number) => (
+                                                <NavLink
+                                                    key={linkIndex}
+                                                    href={link.url}
+                                                    sx={{
+                                                        variant: 'links.nav', // Use the custom variant
+                                                    }}
+                                                >
+                                                    {link.label}
+                                                </NavLink>
+                                            )
+                                        )}
+                                    </Box>
+                                )}
+                            </Box>
+                        ))}
+                </Grid>
+            </Box>
+        </Box>
     );
 };
 
