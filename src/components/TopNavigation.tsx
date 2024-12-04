@@ -1,8 +1,5 @@
 import React from 'react';
 import { Box, useThemeUI, Text } from 'theme-ui';
-import CustomButton from './CustomButton';
-import { Link } from 'gatsby-link';
-import { StaticImage } from 'gatsby-plugin-image';
 import LanguageSwitcher from './LanguageSwitcher';
 import { navigate } from 'gatsby';
 
@@ -16,7 +13,7 @@ const TopNavigation: React.FC<TopNavigationProps> = (
     props: TopNavigationProps
 ) => {
     const { theme } = useThemeUI();
-    const { logoSrc, setShowOverlay, showOverlay } = props;
+    const { setShowOverlay, showOverlay } = props;
 
     return (
         <Box
@@ -27,7 +24,7 @@ const TopNavigation: React.FC<TopNavigationProps> = (
                 zIndex: 1000,
                 width: '100%',
                 py: 3,
-                backgroundColor: theme.colors?.background
+                // backgroundColor: theme.colors?.background
             }}
         >
             <Box
@@ -45,6 +42,7 @@ const TopNavigation: React.FC<TopNavigationProps> = (
                         display: 'flex',
                         alignItems: 'center',
                         gap: 3,
+                        background: theme.colors?.background,
                     }}
                 >
                     <Box
@@ -80,13 +78,15 @@ const TopNavigation: React.FC<TopNavigationProps> = (
                             width: '100%',
                             maxWidth: '240px',
                             mt: 3,
-                            mr: 4
+                            mr: 4,
                         }}
                     >
                         <img
                             alt='scs logo'
                             src='/logo/scs-horizontal-black.svg'
-                            onClick={() => navigate('/')}
+                            onClick={() =>
+                                (navigate as unknown as (path: string) => void)('/')
+                            }
                             style={{ width: '100%' }}
                         />
                     </Box>

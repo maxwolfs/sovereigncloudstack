@@ -22,22 +22,12 @@ const theme = {
     },
     colors: {
         text: '#111',
-        background: '#fff',
+        background: '#f6f6f6',
         primary: '#465DFF',
         secondary: '#50ffaa',
         muted: '#f6f6f6',
-        boxBackground: 'rgba(255, 255, 255, 0.8)',
-        boxShadow: '0px 0px 40px 20px rgba(255, 255, 255, 1)',
-        modes: {
-            // dark: {
-            //     text: '#f6f6f6',
-            //     background: '#111',
-            //     primary: '#1C2566',
-            //     secondary: '#50ffaa',
-            //     boxBackground: 'rgba(0, 0, 0, 0.8)',
-            //     boxShadow: 'rgba(0, 0, 0, 1)',
-            // },
-        },
+        boxBackground: 'rgba(246, 246, 246, 0.8)',
+        boxShadow: '0px 0px 40px 20px rgba(246, 246, 246, 1)',
     },
     text: {
         heading: {
@@ -102,12 +92,12 @@ const theme = {
     links: {
         nav: {
             textDecoration: 'none',
-            color: 'background', // Set to white by default
+            color: 'background',
             fontSize: 1,
             fontWeight: 'bold',
             '&:hover': {
-                color: 'secondary', // Hover to secondary color (e.g., green)
-                textDecoration: 'none', // Remove underline
+                color: 'secondary',
+                textDecoration: 'none', 
             },
         },
     },
@@ -123,7 +113,7 @@ const theme = {
             fontFamily: 'body',
             fontWeight: 'body',
             lineHeight: 'body',
-            fontSize: [2, 2, 3, 3], // Adjust the size to your preference
+            fontSize: [2, 2, 3, 3], 
             color: 'text',
         },
         h1: {

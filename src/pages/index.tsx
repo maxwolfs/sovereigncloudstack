@@ -1,11 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Box, Grid, NavLink, Text, useColorMode, useThemeUI } from 'theme-ui';
 import { graphql, navigate } from 'gatsby';
-import MenuOverlay from '../components/MenuOverlay';
-import TopNavigation from '../components/TopNavigation';
 import CustomButton from '../components/CustomButton';
-import Footer from '../components/Footer';
-import { StaticImage } from 'gatsby-plugin-image';
 import Layout from '../components/Layout';
 
 export default function Home({ data, pageContext }: any) {
@@ -42,7 +38,7 @@ export default function Home({ data, pageContext }: any) {
                     px: ['20px', '20px', '20px', '40px'],
                 }}
             >
-                <StaticImage
+                {/* <StaticImage
                     src='../images/bg3.webp' // Adjust to your actual image path in src
                     alt='Background'
                     layout='fullWidth'
@@ -55,7 +51,7 @@ export default function Home({ data, pageContext }: any) {
                         height: '100%',
                         zIndex: -1, // Send to background
                     }}
-                />
+                /> */}
 
                 <Grid
                     columns={[2, 4, 4, 6]}
@@ -162,7 +158,7 @@ export default function Home({ data, pageContext }: any) {
                         m: 'auto',
                     }}
                 >
-                    <StaticImage
+                    {/* <StaticImage
                         src='../images/bg1.webp' // Adjust to your actual image path in src
                         alt='Background'
                         layout='fullWidth'
@@ -174,7 +170,7 @@ export default function Home({ data, pageContext }: any) {
                             height: '100%',
                             zIndex: -1, // Send to background
                         }}
-                    />
+                    /> */}
                     <Box
                         sx={{
                             gridColumn: ['1 / -1', null, '2 / 7'],
@@ -252,7 +248,7 @@ export default function Home({ data, pageContext }: any) {
                     px: ['20px', '20px', '20px', '40px'],
                 }}
             >
-                <StaticImage
+                {/* <StaticImage
                     src='../images/bg3.webp' // Adjust to your actual image path in src
                     alt='Background'
                     layout='fullWidth'
@@ -264,7 +260,7 @@ export default function Home({ data, pageContext }: any) {
                         height: '100%',
                         zIndex: -1, // Send to background
                     }}
-                />
+                /> */}
                 <Grid
                     columns={[1, null, 6]}
                     gap={[4, 20, 20, 40]}
@@ -328,7 +324,7 @@ export default function Home({ data, pageContext }: any) {
                     height: '100%',
                 }}
             >
-                <StaticImage
+                {/* <StaticImage
                     src='../images/bg1.webp' // Adjust to your actual image path in src
                     alt='Background'
                     layout='fullWidth'
@@ -340,7 +336,7 @@ export default function Home({ data, pageContext }: any) {
                         height: '100%',
                         zIndex: -1, // Send to background
                     }}
-                />
+                /> */}
                 <Grid
                     columns={[2, 4, 4, 6]}
                     gap={[4, 20, 20, 40]}

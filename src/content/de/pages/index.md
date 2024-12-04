@@ -16,11 +16,11 @@ meta:
 sections:
     - type: 'hero'
       headline1: 'Entdecken Sie'
-      headline2: 'die Cloud...'
+      headline2: 'die Supercloud...'
       text1: '... auf der Nutzer mühelos zwischen verschiedenen Anbietern wechseln können.'
 
     - type: 'second'
-      headline1: 'eine Plattorm...'
+      headline1: 'eine Cloud Plattorm...'
       boxes:
           - title: '... entwickelt'
             text: 'mit modernster Technologie konzipiert, um eine nahtlose Integration und optimale Performance in verschiedenen Cloud-Umgebungen zu ermöglichen.'

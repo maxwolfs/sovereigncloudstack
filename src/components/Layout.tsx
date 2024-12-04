@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import TopNavigation from './TopNavigation';
 import MenuOverlay from './MenuOverlay';
 import Footer from './Footer';
-import { Box } from 'theme-ui';
+import BackgroundAnimation from './BackgroundAnimation'; // Import der Animation
+import { Box, useThemeUI } from 'theme-ui';
 
 interface LayoutProps {
     children: React.ReactNode;
@@ -11,6 +12,7 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
     const [showOverlay, setShowOverlay] = useState(false);
     const [logoSrc, setLogoSrc] = useState('/logo/scs-horizontal-black.svg');
+    const { theme } = useThemeUI();
 
     useEffect(() => {
         if (showOverlay) {
@@ -29,8 +31,13 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 display: 'flex',
                 flexDirection: 'column',
                 minHeight: '100vh',
+                position: 'relative',
+                overflow: 'hidden',
             }}
         >
+            {/* Hintergrundanimation */}
+            <BackgroundAnimation />
+
             {showOverlay && (
                 <MenuOverlay
                     showOverlay={showOverlay}
@@ -39,13 +46,16 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 />
             )}
 
+            {/* Navigation */}
             <TopNavigation
                 setShowOverlay={setShowOverlay}
                 logoSrc={logoSrc}
                 showOverlay={showOverlay}
             />
+
+            {/* Hauptinhalt */}
             <Box
-                as="main"
+                as='main'
                 sx={{
                     flex: '1 0 auto',
                     mt: ['80px', '100px'], // Abhängig von der Höhe der Navigation
@@ -53,6 +63,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             >
                 {children}
             </Box>
+
+            {/* Footer */}
             <Footer />
         </Box>
     );

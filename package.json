@@ -19,12 +19,12 @@
     "@emotion/react": "^11.13.3",
     "@mdx-js/react": "^2.3.0",
     "@theme-ui/mdx": "^0.16.2",
-    "gatsby": "^5.13.7",
+    "gatsby": "^5.14.0",
     "gatsby-plugin-image": "^3.13.1",
     "gatsby-plugin-manifest": "^5.13.1",
     "gatsby-plugin-react-helmet": "^6.13.1",
     "gatsby-plugin-react-i18next": "^3.0.1",
-    "gatsby-plugin-sharp": "^5.13.1",
+    "gatsby-plugin-sharp": "^5.14.0",
     "gatsby-plugin-sitemap": "^6.13.1",
     "gatsby-plugin-theme-ui": "^0.16.2",
     "gatsby-remark-images": "^7.13.2",
@@ -36,13 +36,16 @@
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
     "react-i18next": "^12.3.1",
-    "theme-ui": "^0.16.2"
+    "sharp": "^0.33.5",
+    "theme-ui": "^0.16.2",
+    "three": "^0.171.0"
   },
   "devDependencies": {
     "@types/node": "^20.11.19",
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.19",
     "@types/react-helmet": "^6.1.11",
+    "@types/three": "^0.170.0",
     "typescript": "^5.3.3"
   }
 }
