@@ -13,6 +13,7 @@ interface NewsPostProps {
                 language: string;
                 authors: Array<{ name: string; image: any }>;
                 featuredImage: any;
+                enableAnimation?: boolean
             };
             html: string;
         };
@@ -39,8 +40,13 @@ const NewsPost: React.FC<NewsPostProps> = ({ data }) => {
     }, [showOverlay]);
 
     return (
-        <Layout>
-            <title>{frontmatter.title} – Sovereign Cloud Stack</title>
+        <Layout
+            pageContext={{
+                frontmatter: {
+                    enableAnimation: frontmatter.enableAnimation ?? true, // Default-Wert
+                },
+            }}
+        >            <title>{frontmatter.title} – Sovereign Cloud Stack</title>
 
             <Box
                 sx={{
@@ -143,6 +149,7 @@ export const query = graphql`
                 title
                 date(formatString: "MMMM DD, YYYY")
                 language
+                enableAnimation
                 authors {
                     name
                     image {

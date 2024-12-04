@@ -15,8 +15,13 @@ export default function Home({ data, pageContext }: any) {
     }
 
     return (
-        <Layout>
-            <title>{content.title} – </title>
+        <Layout
+            pageContext={{
+                frontmatter: {
+                    enableAnimation: content.enableAnimation ?? true, // Default-Wert
+                },
+            }}
+        >            <title>{content.title} – </title>
             <meta name='viewport' content={content.meta.viewport} />
             <meta name='description' content={content.meta.description} />
             <meta
@@ -38,21 +43,6 @@ export default function Home({ data, pageContext }: any) {
                     px: ['20px', '20px', '20px', '40px'],
                 }}
             >
-                {/* <StaticImage
-                    src='../images/bg3.webp' // Adjust to your actual image path in src
-                    alt='Background'
-                    layout='fullWidth'
-                    placeholder='blurred'
-                    style={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        width: '100%',
-                        height: '100%',
-                        zIndex: -1, // Send to background
-                    }}
-                /> */}
-
                 <Grid
                     columns={[2, 4, 4, 6]}
                     gap={[4, 20, 20, 40]}
@@ -118,6 +108,8 @@ export default function Home({ data, pageContext }: any) {
                         sx={{
                             gridColumn: ['1 / -1', null, '4 / 7'],
                             mt: [0, 4, 4, 5],
+                            background: theme.colors?.boxBackground,
+                            boxShadow: theme.colors?.boxShadow,
                         }}
                     >
                         <Text variant='body' sx={{ fontSize: [1, 3, 3, 4] }}>
@@ -158,22 +150,9 @@ export default function Home({ data, pageContext }: any) {
                         m: 'auto',
                     }}
                 >
-                    {/* <StaticImage
-                        src='../images/bg1.webp' // Adjust to your actual image path in src
-                        alt='Background'
-                        layout='fullWidth'
-                        placeholder='blurred'
-                        style={{
-                            position: 'absolute',
-                            left: 0,
-                            width: '100%',
-                            height: '100%',
-                            zIndex: -1, // Send to background
-                        }}
-                    /> */}
                     <Box
                         sx={{
-                            gridColumn: ['1 / -1', null, '2 / 7'],
+                            gridColumn: ['1 / -1', null, '1 / 7'],
                             zIndex: ['-1000', '-1000', '-1000', '-1000'],
                             mb: [0, 4, 4, 7],
                         }}
@@ -244,23 +223,10 @@ export default function Home({ data, pageContext }: any) {
                 sx={{
                     maxWidth: '1920px',
                     m: 'auto',
-                    pt: [7],
+                    pt: [5],
                     px: ['20px', '20px', '20px', '40px'],
                 }}
             >
-                {/* <StaticImage
-                    src='../images/bg3.webp' // Adjust to your actual image path in src
-                    alt='Background'
-                    layout='fullWidth'
-                    placeholder='blurred'
-                    style={{
-                        position: 'absolute',
-                        left: 0,
-                        width: '100%',
-                        height: '100%',
-                        zIndex: -1, // Send to background
-                    }}
-                /> */}
                 <Grid
                     columns={[1, null, 6]}
                     gap={[4, 20, 20, 40]}
@@ -288,27 +254,20 @@ export default function Home({ data, pageContext }: any) {
                             {content.sections[2].headline1}
                         </Text>
                     </Box>
-                </Grid>
 
-                <Box
-                    sx={{
-                        gridColumn: ['1 / -1', null, '5 / 7'],
-                        mt: [0, 4, 4, 6],
-                        mb: [4, 4, 4, 6],
-                        width: '100%',
-                    }}
-                >
                     <Box
                         sx={{
                             background: theme.colors?.boxBackground,
                             boxShadow: theme.colors?.boxShadow,
+                            gridColumn: ['1 / -1', '1 / 3', '1 / 6'],
+                            mt: [2, 5, 5, 7],
                         }}
                     >
                         <Text variant='body' sx={{ fontSize: [0, 1, 1, 2] }}>
                             {content.sections[2].text}
                         </Text>
                     </Box>
-                </Box>
+                </Grid>
             </Box>
 
             {/* Fourth Section */}
@@ -316,7 +275,7 @@ export default function Home({ data, pageContext }: any) {
                 sx={{
                     maxWidth: '1920px',
                     m: 'auto',
-                    pt: [5, 5, 5, 6],
+                    pt: [5, 5, 5, 7],
                     mb: [4, 4, 4, 6],
                     px: ['20px', '20px', '20px', '40px'],
                     position: 'relative',
@@ -324,19 +283,6 @@ export default function Home({ data, pageContext }: any) {
                     height: '100%',
                 }}
             >
-                {/* <StaticImage
-                    src='../images/bg1.webp' // Adjust to your actual image path in src
-                    alt='Background'
-                    layout='fullWidth'
-                    placeholder='blurred'
-                    style={{
-                        position: 'absolute',
-                        left: 0,
-                        width: '100%',
-                        height: '100%',
-                        zIndex: -1, // Send to background
-                    }}
-                /> */}
                 <Grid
                     columns={[2, 4, 4, 6]}
                     gap={[4, 20, 20, 40]}
@@ -470,6 +416,7 @@ export const query = graphql`
         ) {
             frontmatter {
                 title
+                enableAnimation
                 meta {
                     viewport
                     description

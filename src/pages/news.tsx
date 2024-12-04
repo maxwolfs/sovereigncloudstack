@@ -15,6 +15,7 @@ interface NewsPageData {
     page: {
         frontmatter: {
             title: string;
+            enableAnimation?: boolean;
             description: string;
             headline_events: string;
             headline_announcements: string;
@@ -51,8 +52,7 @@ const NewsPage: React.FC<PageProps<NewsPageData, CustomPageContext>> = ({
 }) => {
     const { language } = pageContext;
     const { page, posts } = data;
-    const [showOverlay, setShowOverlay] = useState<boolean>(false);
-    const [logoSrc, setLogoSrc] = useState('/logo/scs-horizontal-black.svg');
+    const [showOverlay] = useState<boolean>(false);
 
     useEffect(() => {
         if (showOverlay) {
@@ -83,8 +83,13 @@ const NewsPage: React.FC<PageProps<NewsPageData, CustomPageContext>> = ({
     );
 
     return (
-        <Layout>
-            <title>{page.frontmatter.title} – Sovereign Cloud Stack</title>
+        <Layout
+            pageContext={{
+                frontmatter: {
+                    enableAnimation: page.frontmatter.enableAnimation ?? true, // Default-Wert
+                },
+            }}
+        >            <title>{page.frontmatter.title} – Sovereign Cloud Stack</title>
             <meta name='description' content={page.frontmatter.description} />
             <Box
                 sx={{
@@ -142,6 +147,7 @@ export const query = graphql`
         ) {
             frontmatter {
                 title
+                enableAnimation
                 description
                 headline_events
                 headline_announcements

@@ -16,7 +16,7 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children, pageContext }) => {
     const [showOverlay, setShowOverlay] = useState(false);
-    const [logoSrc, setLogoSrc] = useState('/logo/scs-horizontal-black.svg');
+    const [logoSrc] = useState('/logo/scs-horizontal-black.svg');
     const [isAnimationEnabled, setAnimationEnabled] = useState(
         pageContext?.frontmatter?.enableAnimation ?? true // Default-Wert aus Frontmatter
     );

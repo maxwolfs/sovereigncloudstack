@@ -2,7 +2,7 @@
 title: 'Sovereign Cloud Stack'
 language: 'de'
 template: "indexPage"
-enableAnimation: false
+enableAnimation: true
 
 meta:
     viewport: 'width=device-width, initial-scale=1'

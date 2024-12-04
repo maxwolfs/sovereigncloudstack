@@ -4,7 +4,7 @@ import { graphql } from 'gatsby';
 import CustomButton from '../components/CustomButton';
 import Layout from '../components/Layout';
 
-export default function Home({ data, pageContext }: any) {
+export default function Home({ data }: any) {
     const { theme } = useThemeUI();
     const [showOverlay] = useState<boolean>(false);
 
@@ -26,7 +26,13 @@ export default function Home({ data, pageContext }: any) {
     }
 
     return (
-        <Layout>
+        <Layout
+            pageContext={{
+                frontmatter: {
+                    enableAnimation: content.enableAnimation ?? true, // Default-Wert
+                },
+            }}
+        >
             <title>{content.title} – </title>
             <meta name='viewport' content={content.meta.viewport} />
             <meta name='description' content={content.meta.description} />
@@ -270,6 +276,7 @@ export const query = graphql`
         ) {
             frontmatter {
                 title
+                enableAnimation
                 meta {
                     viewport
                     description

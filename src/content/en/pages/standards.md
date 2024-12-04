@@ -2,6 +2,7 @@
 title: 'SCS Standards'
 language: 'en'
 template: "standardsPage"
+enableAnimation: false
 
 meta:
     viewport: 'width=device-width, initial-scale=1'

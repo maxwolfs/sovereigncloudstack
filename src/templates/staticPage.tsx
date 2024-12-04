@@ -11,6 +11,7 @@ type StaticPageQueryData = {
     markdownRemark: {
         frontmatter: {
             title: string;
+            enableAnimation?: boolean;
         };
         html: string;
     };
@@ -18,11 +19,17 @@ type StaticPageQueryData = {
 
 const StaticPage: React.FC<
     PageProps<StaticPageQueryData, CustomPageContext>
-> = ({ data }) => {
+    > = ({ data }) => {
     const { frontmatter, html } = data.markdownRemark;
     const { theme } = useThemeUI();
     return (
-        <Layout>
+        <Layout
+            pageContext={{
+                frontmatter: {
+                    enableAnimation: frontmatter.enableAnimation ?? true, // Default-Wert
+                },
+            }}
+        >
             <div
                 style={{
                     maxWidth: '1200px',
@@ -59,6 +66,7 @@ export const query = graphql`
         ) {
             frontmatter {
                 title
+                enableAnimation
             }
             html
         }

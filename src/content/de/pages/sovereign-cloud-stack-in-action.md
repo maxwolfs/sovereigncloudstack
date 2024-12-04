@@ -3,6 +3,7 @@ title: 'Sovereign Cloud Stack in der Praxis'
 language: 'de'
 slug: 'sovereign-cloud-stack-in-action'
 template: 'staticPage'
+enableAnimation: false
 ---
 
 ### **Sovereign Cloud Stack (SCS) in der Praxis**
