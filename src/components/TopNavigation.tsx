@@ -76,7 +76,7 @@ const TopNavigation: React.FC<TopNavigationProps> = (
                         sx={{
                             cursor: 'pointer',
                             width: '100%',
-                            maxWidth: '240px',
+                            maxWidth: ['120px', '240px', '240px', '240px'],
                             mt: 3,
                             mr: 4,
                         }}
@@ -85,7 +85,9 @@ const TopNavigation: React.FC<TopNavigationProps> = (
                             alt='scs logo'
                             src='/logo/scs-horizontal-black.svg'
                             onClick={() =>
-                                (navigate as unknown as (path: string) => void)('/')
+                                (navigate as unknown as (path: string) => void)(
+                                    '/'
+                                )
                             }
                             style={{ width: '100%' }}
                         />

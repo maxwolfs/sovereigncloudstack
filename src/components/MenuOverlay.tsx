@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Box, Grid, NavLink, Text, useThemeUI } from 'theme-ui';
+import { Box, Button, Grid, NavLink, Text, useThemeUI } from 'theme-ui';
 import TopNavigation from './TopNavigation';
 import { useStaticQuery, graphql } from 'gatsby';
 import { useI18next } from 'gatsby-plugin-react-i18next';
@@ -8,12 +8,16 @@ interface MenuOverlayProps {
     showOverlay: boolean;
     setShowOverlay: Function;
     logoSrc: string;
+    isAnimationEnabled: boolean;
+    toggleAnimation: () => void;
 }
 
 const MenuOverlay: React.FC<MenuOverlayProps> = ({
     showOverlay,
     setShowOverlay,
     logoSrc,
+    isAnimationEnabled,
+    toggleAnimation,
 }) => {
     const { theme } = useThemeUI();
     const { language } = useI18next();
@@ -101,12 +105,12 @@ const MenuOverlay: React.FC<MenuOverlayProps> = ({
                     justifyContent: 'center',
                     width: '100%',
                     flexGrow: 1,
-                    pt: [5, 0, 0, 0],
+                    pt: [5, 5, 5, 5],
                 }}
             >
                 <Grid
                     columns={[1, 1, 3, 3]}
-                    gap={[4, 6]}
+                    gap={[4, 2]}
                     sx={{
                         width: '100%',
                         maxWidth: '1200px',
@@ -145,19 +149,44 @@ const MenuOverlay: React.FC<MenuOverlayProps> = ({
                 </Grid>
             </Box>
 
-            <Box sx={{ textAlign: 'center', mt: 4 }}>
-                <NavLink
-                    href='https://osb-alliance.de'
-                    target='_blank'
+            <Box sx={{ textAlign: 'center' }}>
+                <Button
+                    onClick={toggleAnimation}
                     sx={{
-                        variant: 'links.nav',
-                        fontSize: [0, 1, 1, 1],
-                        color: theme.colors?.text,
-                        fontWeight: 400,
+                        bg: isAnimationEnabled
+                            ? theme.colors?.background
+                            : theme.colors?.secondary,
+                        color: isAnimationEnabled
+                            ? theme.colors?.primary
+                            : theme.colors?.primary,
+                        fontSize: '14px',
+                        py: 2,
+                        px: 3,
+                        textAlign: 'center',
+                        cursor: 'pointer',
+                        ':hover': {
+                            opacity: 0.8,
+                        },
                     }}
                 >
-                    © {currentYear} | Open Source Business Alliance
-                </NavLink>
+                    {isAnimationEnabled
+                        ? 'Animation deaktivieren'
+                        : 'Animation aktivieren'}
+                </Button>
+                <Box sx={{ mt: 3 }}>
+                    <NavLink
+                        href='https://osb-alliance.de'
+                        target='_blank'
+                        sx={{
+                            variant: 'links.nav',
+                            fontSize: [0, 1, 1, 1],
+                            color: theme.colors?.text,
+                            fontWeight: 400,
+                        }}
+                    >
+                        © {currentYear} | Open Source Business Alliance
+                    </NavLink>
+                </Box>
             </Box>
         </Box>
     );

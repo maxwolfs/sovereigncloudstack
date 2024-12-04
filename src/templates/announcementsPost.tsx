@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { graphql } from 'gatsby';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
-import { Box, Grid, Text } from 'theme-ui';
-import MenuOverlay from '../components/MenuOverlay';
-import TopNavigation from '../components/TopNavigation';
-import Footer from '../components/Footer';
+import { Box, Text, useThemeUI } from 'theme-ui';
+import Layout from '../components/Layout';
 
 interface NewsPostProps {
     data: {
@@ -25,8 +23,9 @@ const NewsPost: React.FC<NewsPostProps> = ({ data }) => {
     const { frontmatter, html } = data.markdownRemark;
 
     const featuredImage = getImage(frontmatter.featuredImage);
-    const [logoSrc, setLogoSrc] = useState('/logo/scs-horizontal-black.svg');
-    const [showOverlay, setShowOverlay] = useState<boolean>(false);
+    const [showOverlay] = useState<boolean>(false);
+
+    const { theme } = useThemeUI();
 
     useEffect(() => {
         if (showOverlay) {
@@ -40,28 +39,14 @@ const NewsPost: React.FC<NewsPostProps> = ({ data }) => {
     }, [showOverlay]);
 
     return (
-        <>
+        <Layout>
             <title>{frontmatter.title} – Sovereign Cloud Stack</title>
-
-            {showOverlay && (
-                <MenuOverlay
-                    showOverlay={showOverlay}
-                    setShowOverlay={setShowOverlay}
-                    logoSrc={logoSrc}
-                />
-            )}
-
-            <TopNavigation
-                setShowOverlay={setShowOverlay}
-                logoSrc={logoSrc}
-                showOverlay={showOverlay}
-            />
 
             <Box
                 sx={{
                     maxWidth: '1920px',
                     m: 'auto',
-                    my: 7,
+                    my: [2, 3, 3, 5],
                     px: ['20px', '40px', '100px', '200px'],
                 }}
             >
@@ -86,7 +71,11 @@ const NewsPost: React.FC<NewsPostProps> = ({ data }) => {
                         alt={`Cover image for ${frontmatter.title}`}
                     />
                 )}
-                <Box sx={{ mt: 3 }}>
+                <Box
+                    sx={{
+                        mt: 3,
+                    }}
+                >
                     <Box>
                         {frontmatter.authors.map((author, index) => {
                             const authorImage = author.image
@@ -98,7 +87,7 @@ const NewsPost: React.FC<NewsPostProps> = ({ data }) => {
                                         display: 'inline-flex',
                                         alignItems: 'center',
                                         gap: 2,
-                                        mr: 3
+                                        mr: 3,
                                     }}
                                     key={index}
                                 >
@@ -134,12 +123,14 @@ const NewsPost: React.FC<NewsPostProps> = ({ data }) => {
                     </Box>
                 </Box>
                 <Box
-                    sx={{ variant: 'styles.content' }}
+                    sx={{
+                        variant: 'styles.content',
+                        background: theme.colors?.background,
+                    }}
                     dangerouslySetInnerHTML={{ __html: html }}
                 />
             </Box>
-            <Footer />
-        </>
+        </Layout>
     );
 };
 

@@ -1,9 +1,17 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { Box, Grid, NavLink, useThemeUI, Text } from 'theme-ui';
+import { Box, Grid, NavLink, useThemeUI, Text, Button } from 'theme-ui';
 import { useI18next } from 'gatsby-plugin-react-i18next';
 
-const Footer: React.FC = () => {
+interface FooterProps {
+    isAnimationEnabled: boolean;
+    toggleAnimation: () => void;
+}
+
+const Footer: React.FC<FooterProps> = ({
+    isAnimationEnabled,
+    toggleAnimation,
+}) => {
     const { theme } = useThemeUI();
     const { language } = useI18next();
 
@@ -157,6 +165,39 @@ const Footer: React.FC = () => {
                                 )}
                             </Box>
                         ))}
+                    {/* Animation Toggle Column */}
+                    <Box
+                        sx={{
+                            gridColumn: ['1 / -1', '1 / -1', '1 / 7', '1 / 7'],
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: ['flex-start'],
+                        }}
+                    >
+                        <Button
+                            onClick={toggleAnimation}
+                            sx={{
+                                bg: isAnimationEnabled
+                                    ? theme.colors?.background
+                                    : theme.colors?.secondary,
+                                color: isAnimationEnabled
+                                    ? theme.colors?.primary
+                                    : theme.colors?.primary,
+                                fontSize: '14px',
+                                py: 2,
+                                px: 3,
+                                textAlign: 'center',
+                                cursor: 'pointer',
+                                ':hover': {
+                                    opacity: 0.8,
+                                },
+                            }}
+                        >
+                            {isAnimationEnabled
+                                ? 'Animation deaktivieren'
+                                : 'Animation aktivieren'}
+                        </Button>
+                    </Box>
                 </Grid>
             </Box>
         </Box>

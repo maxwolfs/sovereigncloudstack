@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Box, Grid, Text, NavLink, Image } from 'theme-ui';
+import { Box, Grid, Text, NavLink, useThemeUI } from 'theme-ui';
 import { formatLocalizedDate } from '../helpers/formatLocalizedDate';
-import { StaticImage } from 'gatsby-plugin-image';
 
 interface NewsSectionListProps {
     items: Array<{
@@ -36,8 +35,14 @@ const NewsSectionList: React.FC<NewsSectionListProps> = ({
     const [visibleItems, setVisibleItems] =
         useState<number>(initialVisibleItems);
 
+    const { theme } = useThemeUI();
+
     return (
-        <Box sx={{ mb: [5, 5, 5, 6] }}>
+        <Box
+            sx={{
+                mb: [5, 5, 5, 6],
+            }}
+        >
             <Box sx={{ mb: [3, 4, 4, 5] }}>
                 <Text
                     variant='heading'
@@ -63,6 +68,7 @@ const NewsSectionList: React.FC<NewsSectionListProps> = ({
                             borderBottom: '2px black solid',
                             position: 'relative',
                             minHeight: '100px',
+                            background: theme.colors?.background,
                         }}
                     >
                         <Grid
@@ -137,7 +143,7 @@ const NewsSectionList: React.FC<NewsSectionListProps> = ({
                                 boxShadow: 'none',
                                 '&:hover': {
                                     backgroundColor: 'secondary',
-                                    color: 'primary'
+                                    color: 'primary',
                                 },
                             }}
                         >
@@ -171,7 +177,7 @@ const NewsSectionList: React.FC<NewsSectionListProps> = ({
                             boxShadow: 'none',
                             '&:hover': {
                                 backgroundColor: 'secondary',
-                                color: 'primary'
+                                color: 'primary',
                             },
                         }}
                     >

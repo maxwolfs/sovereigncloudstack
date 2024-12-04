@@ -196,8 +196,7 @@ const BackgroundAnimation: React.FC = () => {
                                 (x2 - x1) ** 2 + (y2 - y1) ** 2 + (z2 - z1) ** 2
                             );
 
-                            if (distance < 1 + Math.random() * 1.5) {
-                                // Zufällige maximale Distanz
+                            if (distance < 1.5) {
                                 const lineGeometry = new THREE.BufferGeometry();
                                 const linePositions = new Float32Array([
                                     x1,

@@ -3,17 +3,23 @@ import TopNavigation from './TopNavigation';
 import MenuOverlay from './MenuOverlay';
 import Footer from './Footer';
 import BackgroundAnimation from './BackgroundAnimation'; // Import der Animation
-import { Box, useThemeUI } from 'theme-ui';
+import { Box } from 'theme-ui';
 
 interface LayoutProps {
     children: React.ReactNode;
+    pageContext?: {
+        frontmatter?: {
+            enableAnimation?: boolean; // Frontmatter-Wert für Animation
+        };
+    };
 }
 
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+const Layout: React.FC<LayoutProps> = ({ children, pageContext }) => {
     const [showOverlay, setShowOverlay] = useState(false);
     const [logoSrc, setLogoSrc] = useState('/logo/scs-horizontal-black.svg');
-    const { theme } = useThemeUI();
-
+    const [isAnimationEnabled, setAnimationEnabled] = useState(
+        pageContext?.frontmatter?.enableAnimation ?? true // Default-Wert aus Frontmatter
+    );
     useEffect(() => {
         if (showOverlay) {
             document.body.classList.add('no-scroll');
@@ -36,13 +42,15 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             }}
         >
             {/* Hintergrundanimation */}
-            <BackgroundAnimation />
+            {isAnimationEnabled && <BackgroundAnimation />}
 
             {showOverlay && (
                 <MenuOverlay
                     showOverlay={showOverlay}
                     setShowOverlay={setShowOverlay}
                     logoSrc={logoSrc}
+                    isAnimationEnabled={isAnimationEnabled}
+                    toggleAnimation={() => setAnimationEnabled(!isAnimationEnabled)}
                 />
             )}
 
@@ -64,8 +72,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 {children}
             </Box>
 
-            {/* Footer */}
-            <Footer />
+            <Footer
+                isAnimationEnabled={isAnimationEnabled}
+                toggleAnimation={() => setAnimationEnabled(!isAnimationEnabled)}
+            />
         </Box>
     );
 };

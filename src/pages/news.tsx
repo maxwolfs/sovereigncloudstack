@@ -5,6 +5,7 @@ import Footer from '../components/Footer';
 import MenuOverlay from '../components/MenuOverlay';
 import TopNavigation from '../components/TopNavigation';
 import NewsSectionList from '../components/NewsSectionList';
+import Layout from '../components/Layout';
 
 interface CustomPageContext {
     language: string;
@@ -71,7 +72,9 @@ const NewsPage: React.FC<PageProps<NewsPageData, CustomPageContext>> = ({
     const announcements = posts.nodes.filter(
         (post) => post.frontmatter.postType === 'announcements'
     );
-    const blog = posts.nodes.filter((post) => post.frontmatter.postType === 'blog');
+    const blog = posts.nodes.filter(
+        (post) => post.frontmatter.postType === 'blog'
+    );
     const conferences = posts.nodes.filter(
         (post) => post.frontmatter.postType === 'conferences'
     );
@@ -80,29 +83,13 @@ const NewsPage: React.FC<PageProps<NewsPageData, CustomPageContext>> = ({
     );
 
     return (
-        <>
+        <Layout>
             <title>{page.frontmatter.title} – Sovereign Cloud Stack</title>
             <meta name='description' content={page.frontmatter.description} />
-
-            {showOverlay && (
-                <MenuOverlay
-                    showOverlay={showOverlay}
-                    setShowOverlay={setShowOverlay}
-                    logoSrc={logoSrc}
-                />
-            )}
-
-            <TopNavigation
-                setShowOverlay={setShowOverlay}
-                logoSrc={logoSrc}
-                showOverlay={showOverlay}
-            />
-
             <Box
                 sx={{
                     maxWidth: '1920px',
                     m: 'auto',
-                    my: 7,
                     px: ['20px', '20px', '20px', '40px'],
                 }}
             >
@@ -141,9 +128,7 @@ const NewsPage: React.FC<PageProps<NewsPageData, CustomPageContext>> = ({
                     loadMoreItemsButtonText={page.frontmatter.more_press_button}
                 />
             </Box>
-
-            <Footer />
-        </>
+        </Layout>
     );
 };
 
@@ -174,12 +159,7 @@ export const query = graphql`
                 frontmatter: {
                     language: { eq: $language }
                     postType: {
-                        in: [
-                            "announcements"
-                            "event"
-                            "conferences"
-                            "press"
-                        ]
+                        in: ["announcements", "event", "conferences", "press"]
                     }
                 }
             }

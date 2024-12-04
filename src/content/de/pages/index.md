@@ -2,6 +2,7 @@
 title: 'Sovereign Cloud Stack'
 language: 'de'
 template: "indexPage"
+enableAnimation: false
 
 meta:
     viewport: 'width=device-width, initial-scale=1'
@@ -16,7 +17,7 @@ meta:
 sections:
     - type: 'hero'
       headline1: 'Entdecken Sie'
-      headline2: 'die Supercloud...'
+      headline2: 'die Cloud...'
       text1: '... auf der Nutzer mühelos zwischen verschiedenen Anbietern wechseln können.'
 
     - type: 'second'
