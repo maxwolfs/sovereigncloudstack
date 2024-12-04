@@ -30,7 +30,7 @@ const NewsSectionList: React.FC<NewsSectionListProps> = ({
     language,
     moreButtonText,
     loadMoreItemsButtonText,
-    initialVisibleItems = 2,
+    initialVisibleItems = 5,
 }) => {
     const [visibleItems, setVisibleItems] =
         useState<number>(initialVisibleItems);

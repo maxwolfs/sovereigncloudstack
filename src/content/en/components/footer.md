@@ -33,9 +33,7 @@ columns:
           - label: 'News'
             url: '/news'
           - label: 'Events'
-            url: '/news#events'
-          - label: 'Conferences'
-            url: '/news#conferences'
+            url: '/events'
     - title: 'Network'
       links:
           - label: 'Community'

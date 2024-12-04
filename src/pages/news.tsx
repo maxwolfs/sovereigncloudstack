@@ -107,7 +107,7 @@ const NewsPage: React.FC<PageProps<NewsPageData, CustomPageContext>> = ({
                         page.frontmatter.more_announcements_button
                     }
                 />
-                <NewsSectionList
+                {/* <NewsSectionList
                     items={events}
                     headline={page.frontmatter.headline_events}
                     language={language}
@@ -115,8 +115,8 @@ const NewsPage: React.FC<PageProps<NewsPageData, CustomPageContext>> = ({
                     loadMoreItemsButtonText={
                         page.frontmatter.more_events_button
                     }
-                />
-                <NewsSectionList
+                /> */}
+                {/* <NewsSectionList
                     items={conferences}
                     headline={page.frontmatter.headline_conferences}
                     language={language}
@@ -131,7 +131,7 @@ const NewsPage: React.FC<PageProps<NewsPageData, CustomPageContext>> = ({
                     language={language}
                     moreButtonText={page.frontmatter.more_button}
                     loadMoreItemsButtonText={page.frontmatter.more_press_button}
-                />
+                /> */}
             </Box>
         </Layout>
     );
