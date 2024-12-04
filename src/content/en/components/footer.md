@@ -26,6 +26,8 @@ columns:
             url: '/standards'
           - label: 'Digital Sovereignty'
             url: '/digital-sovereignty'
+          - label: 'In Action'
+            url: '/sovereign-cloud-stack-in-action'
     - title: 'Current Topics'
       links:
           - label: 'News'

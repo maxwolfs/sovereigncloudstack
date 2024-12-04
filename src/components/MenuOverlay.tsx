@@ -122,19 +122,19 @@ const MenuOverlay: React.FC<MenuOverlayProps> = ({
                         <Box key={colIndex}>
                             <Text
                                 variant='bold'
-                                sx={{ mb: 3, fontSize: [1, 2, 3, 3] }}
+                                sx={{ fontSize: [1, 2, 3, 3] }}
                             >
                                 {column.title}
                             </Text>
                             {column.links.map(
                                 (link: any, linkIndex: number) => (
-                                    <Box key={linkIndex} my={[2, 2, 4, 4]}>
+                                    <Box key={linkIndex} my={[1, 2, 3, 3]}>
                                         <NavLink
                                             key={linkIndex}
                                             href={link.url}
                                             sx={{
                                                 variant: 'links.nav',
-                                                fontSize: [1, 2, 3, 3],
+                                                fontSize: [0, 1, 3, 3],
                                                 color: theme.colors?.text,
                                                 fontWeight: 400,
                                             }}

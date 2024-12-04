@@ -1,7 +1,7 @@
 import React from 'react';
 import { PageProps, graphql } from 'gatsby';
 import Layout from '../components/Layout';
-import { Box, Text } from 'theme-ui';
+import { Box, Text, useThemeUI } from 'theme-ui';
 
 interface CustomPageContext {
     language: string;
@@ -20,7 +20,7 @@ const StaticPage: React.FC<
     PageProps<StaticPageQueryData, CustomPageContext>
 > = ({ data }) => {
     const { frontmatter, html } = data.markdownRemark;
-
+    const { theme } = useThemeUI();
     return (
         <Layout>
             <div
@@ -40,7 +40,13 @@ const StaticPage: React.FC<
                         {frontmatter.title}
                     </Text>
                 </Box>
-                <div dangerouslySetInnerHTML={{ __html: html }} />
+                <Box
+                    sx={{
+                        background: theme.colors?.background,
+                        maxWidth: 800
+                    }}
+                    dangerouslySetInnerHTML={{ __html: html }}
+                />
             </div>
         </Layout>
     );

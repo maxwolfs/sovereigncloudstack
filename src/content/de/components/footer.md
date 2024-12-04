@@ -26,6 +26,8 @@ columns:
             url: '/standards'
           - label: 'Digitale Souveränität'
             url: '/digital-sovereignty'
+          - label: 'SCS in der Praxis'
+            url: '/sovereign-cloud-stack-in-action'
     - title: 'Aktuelles'
       links:
           - label: 'Neuigkeiten'

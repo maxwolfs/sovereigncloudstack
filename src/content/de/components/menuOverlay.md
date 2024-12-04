@@ -10,7 +10,7 @@ columns:
             url: '/https://docs.scs.community'
           - label: 'SCS Standards'
             url: '/standards'
-          - label: 'In der Praxis'
+          - label: 'SCS in der Praxis'
             url: '/sovereign-cloud-stack-in-action'
           - label: 'Unser Netzwerk'
             url: '/network'
