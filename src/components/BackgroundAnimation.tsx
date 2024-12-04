@@ -251,10 +251,10 @@ const BackgroundAnimation: React.FC = () => {
         clouds.forEach((cloud) => scene.add(cloud));
 
         let lastRenderTime = Date.now();
-        const targetFPS = 60;
+        const targetFPS = 30;
         const frameInterval = 1000 / targetFPS;
 
-        const dampingFactor = 0.05; // Wie stark die Punkte zur Ausgangsposition zurückgezogen werden
+        const dampingFactor = 0.1; // Wie stark die Punkte zur Ausgangsposition zurückgezogen werden
 
         // Speichere die ursprünglichen Positionen der Partikel
         const originalPositions: Float32Array[] = clouds.map((cloud) =>
