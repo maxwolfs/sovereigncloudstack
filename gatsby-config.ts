@@ -44,7 +44,7 @@ const config: GatsbyConfig = {
             resolve: 'gatsby-source-filesystem',
             options: {
                 name: 'images',
-                path: './src/images/',
+                path: `${__dirname}/src/images/`,
             },
             __key: 'images',
         },
@@ -64,7 +64,7 @@ const config: GatsbyConfig = {
                     {
                         matchPath: '/:lang?/index', // Match the root path and language-specific root
                         getLanguageFromPath: true,
-                    },
+                    }
                 ],
             },
         },

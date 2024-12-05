@@ -1,38 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Box, Grid, NavLink, Text, useColorMode, useThemeUI } from 'theme-ui';
 import { graphql, navigate } from 'gatsby';
-import MenuOverlay from '../components/MenuOverlay';
-import TopNavigation from '../components/TopNavigation';
 import CustomButton from '../components/CustomButton';
-import Footer from '../components/Footer';
-import { StaticImage } from 'gatsby-plugin-image';
+import Layout from '../components/Layout';
 
 export default function Home({ data, pageContext }: any) {
     const { language } = pageContext;
     const { theme } = useThemeUI();
-    const [showOverlay, setShowOverlay] = useState<boolean>(false);
-    const [logoSrc, setLogoSrc] = useState('/logo/scs-horizontal-black.svg'); // Default image
 
     const content = data.markdownRemark.frontmatter;
-
-    useEffect(() => {
-        if (showOverlay) {
-            document.body.classList.add('no-scroll');
-        } else {
-            document.body.classList.remove('no-scroll');
-        }
-        return () => {
-            document.body.classList.remove('no-scroll');
-        };
-    }, [showOverlay]);
 
     if (!content || !content.meta || !content.sections) {
         return <div>Error: Content is missing!</div>; // Optionally, replace this with a loading state
     }
 
     return (
-        <>
-            <title>{content.title} – </title>
+        <Layout
+            pageContext={{
+                frontmatter: {
+                    enableAnimation: content.enableAnimation ?? true, // Default-Wert
+                },
+            }}
+        >            <title>{content.title} – </title>
             <meta name='viewport' content={content.meta.viewport} />
             <meta name='description' content={content.meta.description} />
             <meta
@@ -46,44 +35,14 @@ export default function Home({ data, pageContext }: any) {
             <meta property='og:image' content={content.meta.og_image} />
             <link rel='icon' href='/favicon.png' />
 
-            {showOverlay && (
-                <MenuOverlay
-                    showOverlay={showOverlay}
-                    setShowOverlay={setShowOverlay}
-                    logoSrc={logoSrc}
-                />
-            )}
-
-            <TopNavigation
-                setShowOverlay={setShowOverlay}
-                logoSrc={logoSrc}
-                showOverlay={showOverlay}
-            />
-
             {/* Hero Section */}
             <Box
                 sx={{
                     maxWidth: '1920px',
                     m: 'auto',
-                    mt: 6,
                     px: ['20px', '20px', '20px', '40px'],
                 }}
             >
-                <StaticImage
-                    src='../images/bg3.webp' // Adjust to your actual image path in src
-                    alt='Background'
-                    layout='fullWidth'
-                    placeholder='blurred'
-                    style={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        width: '100%',
-                        height: '100%',
-                        zIndex: -1, // Send to background
-                    }}
-                />
-
                 <Grid
                     columns={[2, 4, 4, 6]}
                     gap={[4, 20, 20, 40]}
@@ -149,6 +108,8 @@ export default function Home({ data, pageContext }: any) {
                         sx={{
                             gridColumn: ['1 / -1', null, '4 / 7'],
                             mt: [0, 4, 4, 5],
+                            background: theme.colors?.boxBackground,
+                            boxShadow: theme.colors?.boxShadow,
                         }}
                     >
                         <Text variant='body' sx={{ fontSize: [1, 3, 3, 4] }}>
@@ -189,22 +150,9 @@ export default function Home({ data, pageContext }: any) {
                         m: 'auto',
                     }}
                 >
-                    <StaticImage
-                        src='../images/bg1.webp' // Adjust to your actual image path in src
-                        alt='Background'
-                        layout='fullWidth'
-                        placeholder='blurred'
-                        style={{
-                            position: 'absolute',
-                            left: 0,
-                            width: '100%',
-                            height: '100%',
-                            zIndex: -1, // Send to background
-                        }}
-                    />
                     <Box
                         sx={{
-                            gridColumn: ['1 / -1', null, '2 / 7'],
+                            gridColumn: ['1 / -1', null, '1 / 7'],
                             zIndex: ['-1000', '-1000', '-1000', '-1000'],
                             mb: [0, 4, 4, 7],
                         }}
@@ -275,23 +223,10 @@ export default function Home({ data, pageContext }: any) {
                 sx={{
                     maxWidth: '1920px',
                     m: 'auto',
-                    pt: [7],
+                    pt: [5],
                     px: ['20px', '20px', '20px', '40px'],
                 }}
             >
-                <StaticImage
-                    src='../images/bg3.webp' // Adjust to your actual image path in src
-                    alt='Background'
-                    layout='fullWidth'
-                    placeholder='blurred'
-                    style={{
-                        position: 'absolute',
-                        left: 0,
-                        width: '100%',
-                        height: '100%',
-                        zIndex: -1, // Send to background
-                    }}
-                />
                 <Grid
                     columns={[1, null, 6]}
                     gap={[4, 20, 20, 40]}
@@ -319,27 +254,20 @@ export default function Home({ data, pageContext }: any) {
                             {content.sections[2].headline1}
                         </Text>
                     </Box>
-                </Grid>
 
-                <Box
-                    sx={{
-                        gridColumn: ['1 / -1', null, '5 / 7'],
-                        mt: [0, 4, 4, 6],
-                        mb: [4, 4, 4, 6],
-                        width: '100%',
-                    }}
-                >
                     <Box
                         sx={{
                             background: theme.colors?.boxBackground,
                             boxShadow: theme.colors?.boxShadow,
+                            gridColumn: ['1 / -1', '1 / 3', '1 / 6'],
+                            mt: [2, 5, 5, 7],
                         }}
                     >
                         <Text variant='body' sx={{ fontSize: [0, 1, 1, 2] }}>
                             {content.sections[2].text}
                         </Text>
                     </Box>
-                </Box>
+                </Grid>
             </Box>
 
             {/* Fourth Section */}
@@ -347,24 +275,14 @@ export default function Home({ data, pageContext }: any) {
                 sx={{
                     maxWidth: '1920px',
                     m: 'auto',
-                    pt: [5, 5, 5, 6],
+                    pt: [5, 5, 5, 7],
                     mb: [4, 4, 4, 6],
                     px: ['20px', '20px', '20px', '40px'],
+                    position: 'relative',
+                    width: '100%',
+                    height: '100%',
                 }}
             >
-                <StaticImage
-                    src='../images/bg1.webp' // Adjust to your actual image path in src
-                    alt='Background'
-                    layout='fullWidth'
-                    placeholder='blurred'
-                    style={{
-                        position: 'absolute',
-                        left: 0,
-                        width: '100%',
-                        height: '100%',
-                        zIndex: -1, // Send to background
-                    }}
-                />
                 <Grid
                     columns={[2, 4, 4, 6]}
                     gap={[4, 20, 20, 40]}
@@ -485,18 +403,20 @@ export default function Home({ data, pageContext }: any) {
                     )}
                 </Grid>
             </Box>
-
-            <Footer />
-        </>
+        </Layout>
     );
 }
 export const query = graphql`
     query HomePageQuery($language: String!) {
         markdownRemark(
-            frontmatter: { language: { eq: $language }, page: { eq: "index" } }
+            frontmatter: {
+                language: { eq: $language }
+                template: { eq: "indexPage" }
+            }
         ) {
             frontmatter {
                 title
+                enableAnimation
                 meta {
                     viewport
                     description

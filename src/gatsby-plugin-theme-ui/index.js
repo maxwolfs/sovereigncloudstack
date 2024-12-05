@@ -1,5 +1,5 @@
 const theme = {
-    breakpoints: ['40em', '52em', '64em'],
+    breakpoints: ['30em', '52em', '74em'],
     space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
     fonts: {
         body: 'Dazzed',
@@ -22,22 +22,12 @@ const theme = {
     },
     colors: {
         text: '#111',
-        background: '#fff',
+        background: '#f6f6f6',
         primary: '#465DFF',
         secondary: '#50ffaa',
         muted: '#f6f6f6',
-        boxBackground: 'rgba(255, 255, 255, 0.8)',
-        boxShadow: '0px 0px 40px 20px rgba(255, 255, 255, 1)',
-        modes: {
-            // dark: {
-            //     text: '#f6f6f6',
-            //     background: '#111',
-            //     primary: '#1C2566',
-            //     secondary: '#50ffaa',
-            //     boxBackground: 'rgba(0, 0, 0, 0.8)',
-            //     boxShadow: 'rgba(0, 0, 0, 1)',
-            // },
-        },
+        boxBackground: 'rgba(246, 246, 246, 0.8)',
+        boxShadow: '0px 0px 40px 20px rgba(246, 246, 246, 1)',
     },
     text: {
         heading: {
@@ -53,7 +43,7 @@ const theme = {
             lineHeight: 'body',
             fontFeatureSettings: "'ss06'",
             wordWrap: 'break-word',
-            color: 'text'
+            color: 'text',
         },
         whiteBody: {
             fontFamily: 'body',
@@ -101,14 +91,30 @@ const theme = {
     },
     links: {
         nav: {
-            
-        }
+            textDecoration: 'none',
+            color: 'background',
+            fontSize: 1,
+            fontWeight: 'bold',
+            '&:hover': {
+                color: 'secondary',
+                textDecoration: 'none', 
+            },
+        },
     },
     styles: {
         root: {
             fontFamily: 'Dazzed',
             lineHeight: 'body',
             fontWeight: 'body',
+            wordBreak: 'break-word',
+            overflowWrap: 'break-word',
+        },
+        content: {
+            fontFamily: 'body',
+            fontWeight: 'body',
+            lineHeight: 'body',
+            fontSize: [2, 2, 3, 3], 
+            color: 'text',
         },
         h1: {
             variant: 'text.heading',
@@ -157,7 +163,7 @@ const theme = {
         td: {
             textAlign: 'left',
             borderBottomStyle: 'solid',
-        }
+        },
     },
 };
 

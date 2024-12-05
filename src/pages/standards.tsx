@@ -1,17 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Grid, NavLink, Text, useColorMode, useThemeUI } from 'theme-ui';
-import { graphql, navigate } from 'gatsby';
-import MenuOverlay from '../components/MenuOverlay';
-import TopNavigation from '../components/TopNavigation';
+import { Box, Grid, Text, useThemeUI } from 'theme-ui';
+import { graphql } from 'gatsby';
 import CustomButton from '../components/CustomButton';
-import Footer from '../components/Footer';
-import { StaticImage } from 'gatsby-plugin-image';
+import Layout from '../components/Layout';
 
-export default function Home({ data, pageContext }: any) {
-    const { language } = pageContext;
+export default function Home({ data }: any) {
     const { theme } = useThemeUI();
-    const [showOverlay, setShowOverlay] = useState<boolean>(false);
-    const [logoSrc, setLogoSrc] = useState('/logo/scs-horizontal-black.svg'); // Default image
+    const [showOverlay] = useState<boolean>(false);
 
     const content = data.markdownRemark.frontmatter;
 
@@ -31,7 +26,13 @@ export default function Home({ data, pageContext }: any) {
     }
 
     return (
-        <>
+        <Layout
+            pageContext={{
+                frontmatter: {
+                    enableAnimation: content.enableAnimation ?? true, // Default-Wert
+                },
+            }}
+        >
             <title>{content.title} – </title>
             <meta name='viewport' content={content.meta.viewport} />
             <meta name='description' content={content.meta.description} />
@@ -45,27 +46,12 @@ export default function Home({ data, pageContext }: any) {
             <meta property='og:type' content={content.meta.og_type} />
             <meta property='og:image' content={content.meta.og_image} />
             <link rel='icon' href='/favicon.png' />
-
-            {showOverlay && (
-                <MenuOverlay
-                    showOverlay={showOverlay}
-                    setShowOverlay={setShowOverlay}
-                    logoSrc={logoSrc}
-                />
-            )}
-
-            <TopNavigation
-                setShowOverlay={setShowOverlay}
-                logoSrc={logoSrc}
-                showOverlay={showOverlay}
-            />
-
             {/* Hero Section */}
             <Box
                 sx={{
                     maxWidth: '1920px',
                     m: 'auto',
-                    my: 7,
+                    my: [2, 3, 3, 5],
                     px: ['20px', '20px', '20px', '40px'],
                 }}
             >
@@ -104,9 +90,16 @@ export default function Home({ data, pageContext }: any) {
                         sx={{
                             gridColumn: ['1 / -1', null, '1 / 5'],
                             mt: [0, 4, 4, 5],
+                            background: theme.colors?.boxBackground,
+                            boxShadow: theme.colors?.boxShadow,
                         }}
                     >
-                        <Text variant='body' sx={{ fontSize: [0, 1, 1, 1] }}>
+                        <Text
+                            variant='body'
+                            sx={{
+                                fontSize: [0, 1, 1, 1],
+                            }}
+                        >
                             {content.sections[0].text1}
                         </Text>
                         {content.sections[0].text1?.button && (
@@ -270,9 +263,7 @@ export default function Home({ data, pageContext }: any) {
                     </Box>
                 </Box>
             </Box>
-
-            <Footer />
-        </>
+        </Layout>
     );
 }
 export const query = graphql`
@@ -280,11 +271,12 @@ export const query = graphql`
         markdownRemark(
             frontmatter: {
                 language: { eq: $language }
-                page: { eq: "standards" }
+                template: { eq: "standardsPage" }
             }
         ) {
             frontmatter {
                 title
+                enableAnimation
                 meta {
                     viewport
                     description

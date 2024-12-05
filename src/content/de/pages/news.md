@@ -1,0 +1,20 @@
+---
+title: "Neuigkeiten"
+description: "Die neuesten Updates und Aktivitäten der Sovereign Cloud Stack Community."
+language: "de"
+template: "newsPage"
+
+headline_events: "Veranstaltungen"
+intro_events: "Hier finden Sie Informationen zu unseren bevorstehenden und vergangenen Veranstaltungen, einschließlich Workshops, Konferenzen und Meetups."
+headline_announcements: "Ankündigungen"
+intro_announcements: "Bleiben Sie auf dem Laufenden mit den neuesten offiziellen Mitteilungen der SCS-Community."
+headline_conferences: "Konferenzbeiträge"
+intro_conferences: "Einblicke in unsere Präsentationen und Vorträge auf internationalen Konferenzen."
+headline_press: "Presse"
+intro_press: "Lesen Sie, was andere über die Sovereign Cloud Stack Community berichten."
+more_events_button: "Mehr Veranstaltungen ↓"
+more_announcements_button: "Mehr Ankündigungen ↓"
+more_conferences_button: "Mehr Beiträge ↓"
+more_press_button: "Mehr Beiträge ↓"
+more_button: "Mehr →"
+---

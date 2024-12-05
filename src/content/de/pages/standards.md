@@ -1,8 +1,8 @@
 ---
 title: 'SCS Standards'
-
 language: 'de'
-page: 'standards'
+template: "standardsPage"
+enableAnimation: false
 
 meta:
     viewport: 'width=device-width, initial-scale=1'

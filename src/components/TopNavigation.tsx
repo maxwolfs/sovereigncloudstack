@@ -1,8 +1,5 @@
 import React from 'react';
 import { Box, useThemeUI, Text } from 'theme-ui';
-import CustomButton from './CustomButton';
-import { Link } from 'gatsby-link';
-import { StaticImage } from 'gatsby-plugin-image';
 import LanguageSwitcher from './LanguageSwitcher';
 import { navigate } from 'gatsby';
 
@@ -16,7 +13,7 @@ const TopNavigation: React.FC<TopNavigationProps> = (
     props: TopNavigationProps
 ) => {
     const { theme } = useThemeUI();
-    const { logoSrc, setShowOverlay, showOverlay } = props;
+    const { setShowOverlay, showOverlay } = props;
 
     return (
         <Box
@@ -26,11 +23,8 @@ const TopNavigation: React.FC<TopNavigationProps> = (
                 left: 0,
                 zIndex: 1000,
                 width: '100%',
-                // bg: theme.colors?.background,
-                // pt: showOverlay ? 0 : 3
                 py: 3,
-                // background: theme.colors?.boxBackground,
-                // boxShadow: theme.colors?.boxShadow,
+                // backgroundColor: theme.colors?.background
             }}
         >
             <Box
@@ -45,12 +39,12 @@ const TopNavigation: React.FC<TopNavigationProps> = (
             >
                 <Box
                     sx={{
-                        alignSelf: 'flex-start',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 3,
                         background: theme.colors?.background,
                     }}
                 >
-                    <LanguageSwitcher />
-
                     <Box
                         sx={{
                             cursor: 'pointer',
@@ -64,6 +58,7 @@ const TopNavigation: React.FC<TopNavigationProps> = (
                             {showOverlay ? '✕' : '☰'}
                         </Text>
                     </Box>
+                    <LanguageSwitcher />
                 </Box>
                 <Box
                     sx={{
@@ -72,23 +67,28 @@ const TopNavigation: React.FC<TopNavigationProps> = (
                         background: theme.colors?.background,
                     }}
                 >
-                    <CustomButton
+                    {/* <CustomButton
                         variant='secondary'
                         label='Zur SCS-Dokumentation →'
                         href='https://docs.scs.community'
-                    />
+                    /> */}
                     <Box
                         sx={{
                             cursor: 'pointer',
                             width: '100%',
-                            maxWidth: "240px",
+                            maxWidth: ['120px', '240px', '240px', '240px'],
                             mt: 3,
+                            mr: 4,
                         }}
                     >
                         <img
                             alt='scs logo'
                             src='/logo/scs-horizontal-black.svg'
-                            onClick={() => navigate('/')}
+                            onClick={() =>
+                                (navigate as unknown as (path: string) => void)(
+                                    '/'
+                                )
+                            }
                             style={{ width: '100%' }}
                         />
                     </Box>
