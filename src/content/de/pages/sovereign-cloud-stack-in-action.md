@@ -26,9 +26,9 @@ Die SCS-Referenzimplementierung bietet alle Basistechnologien, die für eine dig
 
 SCS wird von einer Vielzahl führender Institutionen und Unternehmen eingesetzt, die auf digitale Souveränität setzen:
 
-#### **Artcodix**
+#### **artcodix GmbH**
 
-[Artcodix GmbH](https://artcodix.de) nutzt SCS, um skalierbare Cloud-Lösungen für den Mittelstand zu realisieren.
+[artcodix GmbH](https://artcodix.de) nutzt SCS, um skalierbare Cloud-Lösungen für den Mittelstand zu realisieren.
 
 #### **FAU Erlangen**
 

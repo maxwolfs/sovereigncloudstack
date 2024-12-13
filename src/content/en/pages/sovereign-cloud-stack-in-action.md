@@ -26,9 +26,9 @@ The SCS reference implementation offers all foundational technologies needed for
 
 SCS is adopted by a wide range of leading institutions and companies committed to digital sovereignty:
 
-#### **Artcodix**
+#### **artcodix GmbH**
 
-[Artcodix GmbH](https://artcodix.de) leverages SCS to develop scalable cloud solutions for medium-sized enterprises.
+[artcodix GmbH](https://artcodix.de) leverages SCS to develop scalable cloud solutions for medium-sized enterprises.
 
 #### **FAU Erlangen**
 
