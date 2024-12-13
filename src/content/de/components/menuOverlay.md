@@ -7,7 +7,7 @@ columns:
           - label: 'Über SCS'
             url: '/about'
           - label: 'Dokumentation'
-            url: '/https://docs.scs.community'
+            url: 'https://docs.scs.community'
           - label: 'SCS Standards'
             url: '/standards'
           - label: 'SCS in der Praxis'
